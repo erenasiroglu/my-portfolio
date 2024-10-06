@@ -26,13 +26,13 @@ export default function About({ isLoading }: AboutProps) {
     en: {
       title: "About Me",
       description:
-        "I'm a web developer constantly evolving in the field, with mobile and backend experience using React Native and Node.js. As a Management Information Systems graduate (2024), I've been working professionally since November 2022.",
+        "Hello, I am Eren. I graduated from the Management Information Systems department in 2024. My experience in web development started in November 2022, and since then, I have been actively working to improve myself in the software industry. Although I have professional experience with React, Next.js, and Vue, I continue to enhance my skills every day with creative projects I come up with, focusing on React Native and Node.js as well. I always prioritize creating products with user-friendly design and clean code principles.",
       experience: "Professional Experience",
     },
     tr: {
       title: "Hakkımda",
       description:
-        "Web alanında sürekli gelişen, React Native ve Node.js ile mobil ve backend deneyimi olan bir yazılım geliştiriciyim. Yönetim Bilişim Sistemleri mezunu (2024) olarak, 2022 Kasım'dan beri profesyonel olarak çalışıyorum.",
+        "Merhaba, ben Eren. 2024 yılında Yönetim Bilişim Sistemleri bölümünden mezun oldum. Web geliştirme deneyimim Kasım 2022'de başladı ve o zamandan beri yazılım endüstrisinde kendimi geliştirmek için aktif olarak çalışıyorum. React, Next.js ve Vue konusunda profesyonel deneyimim olmasına rağmen, React Native ve Node.js üzerine odaklanarak her gün kendimi geliştirmeye devam ediyorum. Her zaman kullanıcı dostu tasarım ve temiz kod prensiplerine sahip ürünler oluşturmayı önceliklendiriyorum.",
       experience: "Profesyonel Deneyim",
     },
   };
@@ -49,7 +49,14 @@ export default function About({ isLoading }: AboutProps) {
         en: "BeforeSunset AI is a project that uses artificial intelligence to help users better plan their time. We develop solutions using React, Next.js, Zustand, and Supabase.",
         tr: "BeforeSunset AI, kullanıcıların zamanlarını daha iyi planlamalarına yardımcı olmak için yapay zeka kullanan bir projedir. React, Next.js, Zustand ve Supabase kullanarak çözümler geliştiriyoruz.",
       },
-      technologies: ["React", "Next.js", "Zustand", "Supabase"],
+      technologies: [
+        "React",
+        "Next.js",
+        "Zustand",
+        "Supabase",
+        "Storybook",
+        "Firebase",
+      ],
       highlights: {
         en: ["Feature development", "Bug fixing", "Task documentation"],
         tr: ["Özellik geliştirme", "Hata düzeltme", "Görev dokümantasyonu"],
@@ -66,7 +73,7 @@ export default function About({ isLoading }: AboutProps) {
         en: "Gemas is a company that produces pool technologies. In this project, I was involved in creating an e-commerce site using PHP Laravel.",
         tr: "Gemas, havuz teknolojileri üreten bir şirkettir. Bu projede, PHP Laravel kullanarak bir e-ticaret sitesi oluşturmada yer aldım.",
       },
-      technologies: ["PHP", "Laravel"],
+      technologies: ["PHP", "Laravel", "mySQL"],
       highlights: {
         en: ["Frontend development", "Admin panel backend"],
         tr: ["Frontend geliştirme", "Yönetici paneli backend"],
@@ -88,10 +95,15 @@ export default function About({ isLoading }: AboutProps) {
         "Vuetify",
         "GraphQL",
         "Hasura",
-        "Python",
-        "NumPy",
-        "Matplotlib",
+        "React",
+        "Storybook",
         "Pandas",
+        "Software Testing",
+        "Redux",
+        "Restful API",
+        "UI Design",
+        "Data Analysis",
+        "Feature Flag",
       ],
       highlights: {
         en: [
