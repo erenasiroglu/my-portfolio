@@ -24,6 +24,18 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 
+type MenuItem = {
+  href?: string;
+  icon?: React.ComponentType<IconProps>;
+  label: string;
+  action?: () => void;
+  type?: "separator";
+};
+
+interface IconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string;
+}
+
 export default function Navigation() {
   const [isDragging, setIsDragging] = useState(false);
   const x = useMotionValue(0);
@@ -75,18 +87,26 @@ export default function Navigation() {
 
   const t = translations[language];
 
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     { href: "#about", icon: User, label: t.about },
     { href: "#projects", icon: FolderKanban, label: t.projects },
     { href: "#contact", icon: Mail, label: t.contact },
-    { type: "separator" },
+    {
+      type: "separator",
+      icon: undefined,
+      label: "",
+    },
     {
       href: "https://www.linkedin.com/in/eren-nasiroglu/",
       icon: Linkedin,
       label: "LinkedIn",
     },
     { href: "https://github.com/erenasiroglu", icon: Github, label: "GitHub" },
-    { type: "separator" },
+    {
+      type: "separator",
+      icon: undefined,
+      label: "",
+    },
     {
       icon: Globe,
       label: language === "en" ? "🇬🇧 English" : "🇹🇷 Türkçe",
@@ -166,7 +186,7 @@ export default function Navigation() {
                               rel="noopener noreferrer"
                               onClick={(e) => isDragging && e.preventDefault()}
                             >
-                              <item.icon className="w-4 h-4" />
+                              {item.icon && <item.icon className="w-4 h-4" />}
                             </motion.a>
                           </Link>
                         ) : (
@@ -177,7 +197,7 @@ export default function Navigation() {
                             title={item.label}
                             onClick={item.action}
                           >
-                            <item.icon className="w-4 h-4" />
+                            {item.icon && <item.icon className="w-4 h-4" />}
                           </motion.button>
                         )}
                       </TooltipTrigger>

@@ -82,8 +82,8 @@ export default function Home() {
               >
                 <Hero isLoading={false} />
                 <About isLoading={false} />
-                <Projects isLoading={false} />
-                <Contact isLoading={false} />
+                <Projects />
+                <Contact />
                 <Footer />
               </motion.div>
             )}
