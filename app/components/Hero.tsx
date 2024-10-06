@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -11,13 +11,10 @@ interface HeroProps {
   isLoading: boolean;
 }
 
-import { useState } from "react"; // Import useState for managing download progress
-
 export default function Hero({ isLoading }: HeroProps) {
   const { theme } = useTheme();
   const { language } = useLanguage();
-  const [downloadProgress, setDownloadProgress] = useState(0); // State for download progress
-
+  const [downloadProgress, setDownloadProgress] = useState(0);
   const content = {
     en: {
       role: "Frontend Developer",
