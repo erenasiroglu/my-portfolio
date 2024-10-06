@@ -10,8 +10,12 @@ import {
   Github,
   Sun,
   Moon,
+  Globe,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function Navigation() {
   const [isDragging, setIsDragging] = useState(false);
@@ -20,6 +24,8 @@ export default function Navigation() {
 
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { language, setLanguage } = useLanguage();
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -56,6 +62,11 @@ export default function Navigation() {
       label: "Toggle theme",
       action: () => setTheme(theme === "dark" ? "light" : "dark"),
     },
+    {
+      icon: Globe,
+      label: language === "en" ? "🇬🇧 English" : "🇹🇷 Türkçe",
+      action: () => setLanguage(language === "en" ? "tr" : "en"),
+    },
   ];
 
   return (
@@ -72,10 +83,22 @@ export default function Navigation() {
         );
       }}
       style={{ x, y }}
-      className="fixed z-50 cursor-move"
+      className="fixed z-50 cursor-move flex items-center"
     >
+      <motion.button
+        className="bg-nav-bg/80 text-nav-text backdrop-blur-md p-2 rounded-l-full shadow-lg transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700"
+        onClick={() => setIsCollapsed(!isCollapsed)}
+      >
+        {isCollapsed ? (
+          <ChevronRight className="w-6 h-6" />
+        ) : (
+          <ChevronLeft className="w-6 h-6" />
+        )}
+      </motion.button>
       <motion.ul
-        className="flex bg-nav-bg/80 text-nav-text backdrop-blur-md rounded-full p-1 shadow-lg transition-colors duration-300"
+        className={`flex bg-nav-bg/80 text-nav-text backdrop-blur-md rounded-r-full p-1 shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 ${
+          isCollapsed ? "w-0 overflow-hidden" : "w-auto"
+        }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -89,15 +112,11 @@ export default function Navigation() {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
                   title={item.label}
-                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    item.href.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={(e) => isDragging && e.preventDefault()}
                 >
-                  <item.icon size={24} />
+                  <item.icon className="w-6 h-6" />
                 </motion.a>
               </Link>
             ) : (
@@ -108,7 +127,7 @@ export default function Navigation() {
                 title={item.label}
                 onClick={item.action}
               >
-                <item.icon size={24} />
+                <item.icon className="w-6 h-6" />
               </motion.button>
             )}
           </motion.li>

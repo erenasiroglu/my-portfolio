@@ -1,8 +1,11 @@
+"use client";
+
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
-import Link from "next/link";
 import { useTheme } from "next-themes";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface HeroProps {
   isLoading: boolean;
@@ -10,6 +13,18 @@ interface HeroProps {
 
 export default function Hero({ isLoading }: HeroProps) {
   const { theme } = useTheme();
+  const { language } = useLanguage();
+
+  const content = {
+    en: {
+      role: "Frontend Developer",
+      cta: "Discover my 2024 GitHub activity",
+    },
+    tr: {
+      role: "Frontend Geliştirici",
+      cta: "2024 GitHub aktivitemi keşfedin",
+    },
+  };
 
   return (
     <motion.section
@@ -35,7 +50,7 @@ export default function Hero({ isLoading }: HeroProps) {
             theme === "dark" ? "text-gray-300" : "text-gray-600"
           }`}
         >
-          Frontend Developer
+          {content[language].role}
         </p>
       )}
       <motion.div
@@ -52,7 +67,7 @@ export default function Hero({ isLoading }: HeroProps) {
           >
             <Button className="text-lg px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md shadow-md hover:shadow-lg transition-all duration-500 ease-in-out relative overflow-hidden group">
               <span className="relative z-10 transition-colors duration-500 group-hover:text-gray-800">
-                Discover my 2024 GitHub activity
+                {content[language].cta}
               </span>
               <span className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-in-out origin-left"></span>
             </Button>
