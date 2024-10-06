@@ -38,7 +38,7 @@ export default function Hero({ isLoading }: HeroProps) {
       {isLoading ? (
         <Skeleton className="h-20 w-3/4 mx-auto mb-4" />
       ) : (
-        <h1 className="text-[72px] font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+        <h1 className="text-[68px] font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
           Eren Nasıroglu
         </h1>
       )}
