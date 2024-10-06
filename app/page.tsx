@@ -6,8 +6,11 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import Layout from "./components/Layouts";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import Projects from "./components/Projects";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 const poppins = Poppins({
   weight: ["400", "600", "700"],
@@ -79,6 +82,9 @@ export default function Home() {
               >
                 <Hero isLoading={false} />
                 <About isLoading={false} />
+                <Projects isLoading={false} />
+                <Contact isLoading={false} />
+                <Footer />
               </motion.div>
             )}
           </AnimatePresence>

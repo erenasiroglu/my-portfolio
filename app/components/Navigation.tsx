@@ -17,6 +17,13 @@ import {
 import { useTheme } from "next-themes";
 import { useLanguage } from "../contexts/LanguageContext";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
+
 export default function Navigation() {
   const [isDragging, setIsDragging] = useState(false);
   const x = useMotionValue(0);
@@ -47,25 +54,48 @@ export default function Navigation() {
     }
   }, []);
 
+  const translations = {
+    en: {
+      about: "About",
+      projects: "Projects",
+      contact: "Contact",
+      theme: "Toggle theme",
+      openMenu: "Open menu",
+      closeMenu: "Close menu",
+    },
+    tr: {
+      about: "Hakkımda",
+      projects: "Projeler",
+      contact: "İletişim",
+      theme: "Tema değiştir",
+      openMenu: "Menüyü Aç",
+      closeMenu: "Menüyü Kapat",
+    },
+  };
+
+  const t = translations[language];
+
   const menuItems = [
-    { href: "#about", icon: User, label: "Hakkımda" },
-    { href: "#projects", icon: FolderKanban, label: "Projeler" },
-    { href: "#contact", icon: Mail, label: "İletişim" },
+    { href: "#about", icon: User, label: t.about },
+    { href: "#projects", icon: FolderKanban, label: t.projects },
+    { href: "#contact", icon: Mail, label: t.contact },
+    { type: "separator" },
     {
       href: "https://www.linkedin.com/in/eren-nasiroglu/",
       icon: Linkedin,
       label: "LinkedIn",
     },
     { href: "https://github.com/erenasiroglu", icon: Github, label: "GitHub" },
-    {
-      icon: mounted && theme === "dark" ? Sun : Moon,
-      label: "Toggle theme",
-      action: () => setTheme(theme === "dark" ? "light" : "dark"),
-    },
+    { type: "separator" },
     {
       icon: Globe,
       label: language === "en" ? "🇬🇧 English" : "🇹🇷 Türkçe",
       action: () => setLanguage(language === "en" ? "tr" : "en"),
+    },
+    {
+      icon: mounted && theme === "dark" ? Sun : Moon,
+      label: t.theme,
+      action: () => setTheme(theme === "dark" ? "light" : "dark"),
     },
   ];
 
@@ -85,54 +115,86 @@ export default function Navigation() {
       style={{ x, y }}
       className="fixed z-50 cursor-move flex items-center"
     >
-      <motion.button
-        className="bg-nav-bg/80 text-nav-text backdrop-blur-md p-2 rounded-l-full shadow-lg transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700"
-        onClick={() => setIsCollapsed(!isCollapsed)}
-      >
-        {isCollapsed ? (
-          <ChevronRight className="w-6 h-6" />
-        ) : (
-          <ChevronLeft className="w-6 h-6" />
-        )}
-      </motion.button>
-      <motion.ul
-        className={`flex bg-nav-bg/80 text-nav-text backdrop-blur-md rounded-r-full p-1 shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 ${
-          isCollapsed ? "w-0 overflow-hidden" : "w-auto"
-        }`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        {menuItems.map((item, index) => (
-          <motion.li key={item.label || index} className="mx-1">
-            {item.href ? (
-              <Link href={item.href} passHref>
-                <motion.a
-                  className="flex items-center justify-center w-12 h-12 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-800"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                  title={item.label}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => isDragging && e.preventDefault()}
-                >
-                  <item.icon className="w-6 h-6" />
-                </motion.a>
-              </Link>
-            ) : (
+      <motion.div className="flex items-center bg-nav-bg/80 text-nav-text backdrop-blur-md rounded-full shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
               <motion.button
-                className="flex items-center justify-center w-12 h-12 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-800"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.95 }}
-                title={item.label}
-                onClick={item.action}
+                className="p-2 rounded-full transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center"
+                onClick={() => setIsCollapsed(!isCollapsed)}
               >
-                <item.icon className="w-6 h-6" />
+                {isCollapsed ? (
+                  <ChevronRight className="w-5 h-5" />
+                ) : (
+                  <ChevronLeft className="w-5 h-5" />
+                )}
               </motion.button>
-            )}
-          </motion.li>
-        ))}
-      </motion.ul>
+            </TooltipTrigger>
+            <TooltipContent
+              side="bottom"
+              className="bg-gray-800 text-white text-xs py-1 px-2 rounded"
+            >
+              <p>{isCollapsed ? t.openMenu : t.closeMenu}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <motion.ul
+          className={`flex items-center transition-all duration-300 ${
+            isCollapsed ? "w-0 overflow-hidden" : "w-auto p-1"
+          }`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <TooltipProvider>
+            {menuItems.map((item, index) => (
+              <React.Fragment key={item.label || index}>
+                {item.type === "separator" ? (
+                  <div className="mx-1 h-6 w-px bg-gray-300 dark:bg-gray-700" />
+                ) : (
+                  <motion.li className="mx-1">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        {item.href ? (
+                          <Link href={item.href} passHref>
+                            <motion.a
+                              className="flex items-center justify-center w-9 h-9 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-800"
+                              whileHover={{ scale: 1.1, rotate: 5 }}
+                              whileTap={{ scale: 0.95 }}
+                              title={item.label}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => isDragging && e.preventDefault()}
+                            >
+                              <item.icon className="w-4 h-4" />
+                            </motion.a>
+                          </Link>
+                        ) : (
+                          <motion.button
+                            className="flex items-center justify-center w-9 h-9 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-800"
+                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            whileTap={{ scale: 0.95 }}
+                            title={item.label}
+                            onClick={item.action}
+                          >
+                            <item.icon className="w-4 h-4" />
+                          </motion.button>
+                        )}
+                      </TooltipTrigger>
+                      <TooltipContent
+                        side="bottom"
+                        className="bg-gray-800 text-white text-xs py-1 px-2 rounded"
+                      >
+                        <p>{item.label}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </motion.li>
+                )}
+              </React.Fragment>
+            ))}
+          </TooltipProvider>
+        </motion.ul>
+      </motion.div>
     </motion.nav>
   );
 }

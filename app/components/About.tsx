@@ -124,36 +124,36 @@ export default function About({ isLoading }: AboutProps) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
       id="about"
-      className="py-12 max-w-3xl mx-auto px-4"
+      className="py-12 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"
     >
-      <h2 className="text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
         {content[language].title}
       </h2>
       {isLoading ? (
         <Skeleton className="h-64 w-full" />
       ) : (
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="border-b pb-6 border-gray-200 dark:border-gray-700"
+            className="border-b pb-4 sm:pb-6 border-gray-200 dark:border-gray-700"
           >
-            <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-800 dark:text-gray-200">
-              <Briefcase className="mr-3 text-blue-500" size={20} />
+            <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 flex items-center text-gray-800 dark:text-gray-200">
+              <Briefcase className="mr-2 sm:mr-3 text-blue-500" size={20} />
               {language === "en" ? "Web Developer" : "Web Geliştirici"}
             </h3>
-            <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               {content[language].description}
             </p>
           </motion.div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-6 flex items-center text-gray-800 dark:text-gray-200">
-              <Users className="mr-3 text-purple-500" size={20} />
+            <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center text-gray-800 dark:text-gray-200">
+              <Users className="mr-2 sm:mr-3 text-purple-500" size={20} />
               {content[language].experience}
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {experiences.map((exp, index) => (
                 <motion.div
                   key={index}
@@ -161,7 +161,7 @@ export default function About({ isLoading }: AboutProps) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className={cn(
-                    "border rounded-lg p-4 border-gray-200 dark:border-gray-700 transition-all duration-300",
+                    "border rounded-lg p-3 sm:p-4 border-gray-200 dark:border-gray-700 transition-all duration-300",
                     expandedExperience === index
                       ? "shadow-md"
                       : "hover:shadow-sm"
@@ -175,17 +175,17 @@ export default function About({ isLoading }: AboutProps) {
                       )
                     }
                   >
-                    <h4 className="font-bold text-lg text-gray-800 dark:text-gray-200">
+                    <h4 className="font-bold text-base sm:text-lg text-gray-800 dark:text-gray-200">
                       {exp.company}
                     </h4>
                     <div className="flex items-center">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 font-medium mr-2">
+                      <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium mr-2">
                         {exp.year}
                       </span>
                       {expandedExperience === index ? (
-                        <ChevronUp className="text-gray-500" size={20} />
+                        <ChevronUp className="text-gray-500" size={16} />
                       ) : (
-                        <ChevronDown className="text-gray-500" size={20} />
+                        <ChevronDown className="text-gray-500" size={16} />
                       )}
                     </div>
                   </div>
@@ -195,20 +195,20 @@ export default function About({ isLoading }: AboutProps) {
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="mt-4"
+                      className="mt-3 sm:mt-4"
                     >
-                      <p className="text-base font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
+                      <p className="text-sm sm:text-base font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
                         {exp.role[language]}
                       </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mb-2 sm:mb-3">
                         {exp.description[language]}
                       </p>
-                      <div className="mb-3">
+                      <div className="mb-2 sm:mb-3">
                         {exp.technologies.map((tech, i) => (
                           <TechBadge key={i} tech={tech} />
                         ))}
                       </div>
-                      <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
+                      <ul className="list-disc list-inside text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                         {exp.highlights[language].map((highlight, i) => (
                           <li key={i}>{highlight}</li>
                         ))}
