@@ -26,7 +26,7 @@ export default function About({ isLoading }: AboutProps) {
     en: {
       title: "About Me",
       description:
-        "Hello, I am Eren. I graduated from the Management Information Systems department in 2024. My experience in web development started in November 2022, and since then, I have been actively working to improve myself in the software industry. Although I have professional experience with React, Next.js, and Vue, I continue to enhance my skills every day with creative projects I come up with, focusing on React Native and Node.js as well. I always prioritize creating products with user-friendly design and clean code principles.",
+        "Hi, I am Eren. I graduated from the Management Information Systems department in 2024. My experience in web development started in November 2022, and since then, I have been actively working to improve myself in the software industry. Although I have professional experience with React, Next.js, and Vue, I continue to enhance my skills every day with creative projects I come up with, focusing on React Native and Node.js as well. I always prioritize creating products with user-friendly design and clean code principles.",
       experience: "Professional Experience",
     },
     tr: {
@@ -58,8 +58,8 @@ export default function About({ isLoading }: AboutProps) {
         "Firebase",
       ],
       highlights: {
-        en: ["Feature development", "Bug fixing", "Task documentation"],
-        tr: ["Özellik geliştirme", "Hata düzeltme", "Görev dokümantasyonu"],
+        en: ["Feature development", "Bug fixing"],
+        tr: ["Özellik geliştirme", "Hata düzeltme"],
       },
     },
     {
@@ -73,10 +73,10 @@ export default function About({ isLoading }: AboutProps) {
         en: "Gemas is a company that produces pool technologies. In this project, I was involved in creating an e-commerce site using PHP Laravel.",
         tr: "Gemas, havuz teknolojileri üreten bir şirkettir. Bu projede, PHP Laravel kullanarak bir e-ticaret sitesi oluşturmada yer aldım.",
       },
-      technologies: ["PHP", "Laravel", "mySQL"],
+      technologies: ["PHP", "Laravel", "MySQL"],
       highlights: {
-        en: ["Frontend development", "Admin panel backend"],
-        tr: ["Frontend geliştirme", "Yönetici paneli backend"],
+        en: ["Frontend development", "Backend development"],
+        tr: ["Frontend geliştirme", "Backend geliştirme"],
       },
     },
     {
@@ -108,16 +108,14 @@ export default function About({ isLoading }: AboutProps) {
       highlights: {
         en: [
           "Feature development",
-          "Admin panel creation",
-          "UI redesign",
-          "Analytics integration",
+          "Software testing",
+          "Frontend development",
           "Data analysis",
         ],
         tr: [
           "Özellik geliştirme",
-          "Yönetici paneli oluşturma",
-          "Kullanıcı arayüzü yeniden tasarımı",
-          "Analitik entegrasyonu",
+          "Yazılım testi",
+          "Frontend geliştirme",
           "Veri analizi",
         ],
       },

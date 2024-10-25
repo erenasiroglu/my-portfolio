@@ -71,7 +71,7 @@ export default function Navigation() {
       about: "About",
       projects: "Projects",
       contact: "Contact",
-      theme: "Toggle theme",
+      theme: "Change theme",
       openMenu: "Open menu",
       closeMenu: "Close menu",
     },

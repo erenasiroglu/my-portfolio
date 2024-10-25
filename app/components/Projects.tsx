@@ -24,22 +24,17 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     name: {
-      en: "Landing Page",
-      tr: "Açılış Sayfası",
+      en: "Chatbot Ollama",
+      tr: "AI Chatbot",
     },
     description: {
-      en: "I created an creative landing page using React and Tailwind CSS that is mobile-responsive, including a header and footer, with a total of 9 sections.",
-      tr: "Toplamda 9 bölümden oluşan, mobil uyumlu, başlık ve altbilgi içeren, React ve Tailwind CSS kullanarak yaratıcı bir açılış sayfası oluşturdum.",
+      en: "This project is a chatbot application based on Ollama. The frontend is developed with React and Vite, while the backend uses the Hono framework running on Node.js.",
+      tr: "Bu proje, Ollama tabanlı bir sohbet botu uygulamasıdır. Ön uç, React ve Vite ile geliştirilirken, arka uç, Node.js üzerinde çalışan Hono çerçevesini kullanır.",
     },
-    technologies: [
-      "React",
-      "Tailwind CSS",
-      "Redux",
-      "Responsive Design",
-      "Routing",
-    ],
-    github_url: "https://github.com/erenasiroglu/landing-page",
-    live_url: "https://landing-page-erenasiroglus-projects.vercel.app/",
+    technologies: ["Vite", "Ollama", "Node.js", "Hono", "React", "OpenAI"],
+    github_url: "https://github.com/erenasiroglu/chatbot-ollama",
+    live_url:
+      "https://react-ollama-frontend-erenasiroglus-projects.vercel.app/",
   },
   {
     name: {
@@ -76,17 +71,22 @@ const PROJECTS: Project[] = [
   },
   {
     name: {
-      en: "Chatbot Ollama",
-      tr: "AI Chatbot",
+      en: "Landing Page",
+      tr: "Açılış Sayfası",
     },
     description: {
-      en: "This project is a chatbot application based on Ollama. The frontend is developed with React and Vite, while the backend uses the Hono framework running on Node.js.",
-      tr: "Bu proje, Ollama tabanlı bir sohbet botu uygulamasıdır. Ön uç, React ve Vite ile geliştirilirken, arka uç, Node.js üzerinde çalışan Hono çerçevesini kullanır.",
+      en: "I created an creative landing page using React and Tailwind CSS that is mobile-responsive, including a header and footer, with a total of 9 sections.",
+      tr: "Toplamda 9 bölümden oluşan, mobil uyumlu, başlık ve altbilgi içeren, React ve Tailwind CSS kullanarak yaratıcı bir açılış sayfası oluşturdum.",
     },
-    technologies: ["Vite", "Ollama", "Node.js", "Hono", "React", "OpenAI"],
-    github_url: "https://github.com/erenasiroglu/chatbot-ollama",
-    live_url:
-      "https://react-ollama-frontend-erenasiroglus-projects.vercel.app/",
+    technologies: [
+      "React",
+      "Tailwind CSS",
+      "Redux",
+      "Responsive Design",
+      "Routing",
+    ],
+    github_url: "https://github.com/erenasiroglu/landing-page",
+    live_url: "https://landing-page-erenasiroglus-projects.vercel.app/",
   },
   {
     name: {
