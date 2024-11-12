@@ -6,6 +6,13 @@ import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 import { useTheme } from "next-themes";
 import { useLanguage } from "../contexts/LanguageContext";
+import { Globe } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 interface HeroProps {
   isLoading: boolean;
@@ -13,7 +20,7 @@ interface HeroProps {
 
 export default function Hero({ isLoading }: HeroProps) {
   const { theme } = useTheme();
-  const { language } = useLanguage();
+  const { language, setLanguage } = useLanguage();
 
   const content = {
     en: {
@@ -32,6 +39,31 @@ export default function Hero({ isLoading }: HeroProps) {
 
   return (
     <div className="relative">
+      <div className="absolute left-2">
+        <TooltipProvider delayDuration={0}>
+          <Tooltip delayDuration={0}>
+            <TooltipTrigger asChild>
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                whileDrag={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-2"
+                onClick={() => setLanguage(language === "en" ? "tr" : "en")}
+              >
+                <Globe />
+              </motion.button>
+            </TooltipTrigger>
+            <TooltipContent
+              side="bottom"
+              className={`bg-gray-800 text-white text-xs py-1 px-2 rounded`}
+            >
+              <p>
+                {language === "en" ? "Change Language 🇹🇷" : "Dili Değiştir 🏴󠁧󠁢󠁥󠁮󠁧󠁿"}
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
       <div className="w-full flex justify-center md:justify-end md:absolute md:top-4 md:right-4 z-10 gap-3 px-4 pt-4 md:pt-0 md:px-0">
         <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
           <motion.div
