@@ -71,7 +71,7 @@ export default function Navigation() {
       about: "About",
       projects: "Projects",
       contact: "Contact",
-      theme: "Change theme",
+      // theme: "Change theme",
       openMenu: "Open menu",
       closeMenu: "Close menu",
     },
@@ -79,7 +79,7 @@ export default function Navigation() {
       about: "Hakkımda",
       projects: "Projeler",
       contact: "İletişim",
-      theme: "Tema değiştir",
+      // theme: "Tema değiştir",
       openMenu: "Menüyü Aç",
       closeMenu: "Menüyü Kapat",
     },
@@ -112,11 +112,11 @@ export default function Navigation() {
       label: language === "en" ? "🇬🇧 English" : "🇹🇷 Türkçe",
       action: () => setLanguage(language === "en" ? "tr" : "en"),
     },
-    {
-      icon: mounted && theme === "dark" ? Sun : Moon,
-      label: t.theme,
-      action: () => setTheme(theme === "dark" ? "light" : "dark"),
-    },
+    // {
+    //   icon: mounted && theme === "dark" ? Sun : Moon,
+    //   label: t.theme,
+    //   action: () => setTheme(theme === "dark" ? "light" : "dark"),
+    // },
   ];
 
   return (
@@ -136,8 +136,8 @@ export default function Navigation() {
       className="fixed z-50 cursor-move flex items-center"
     >
       <motion.div className="flex items-center bg-nav-bg/80 text-nav-text backdrop-blur-md rounded-full shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700">
-        <TooltipProvider>
-          <Tooltip>
+        <TooltipProvider delayDuration={0}>
+          <Tooltip delayDuration={0}>
             <TooltipTrigger asChild>
               <motion.button
                 className="p-2 rounded-full transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center"

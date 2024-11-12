@@ -19,7 +19,7 @@ export default function Hero({ isLoading }: HeroProps) {
     en: {
       role: "Frontend Developer",
       cta: "Discover my 2024 GitHub activity",
-      upwork: "Available for Work",
+      upwork: "Available for Freelance",
       medium: "Read my blog on Medium",
     },
     tr: {
@@ -32,7 +32,6 @@ export default function Hero({ isLoading }: HeroProps) {
 
   return (
     <div className="relative">
-      {/* Butonlar için container'ı güncelledik */}
       <div className="w-full flex justify-center md:justify-end md:absolute md:top-4 md:right-4 z-10 gap-3 px-4 pt-4 md:pt-0 md:px-0">
         <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
           <motion.div
