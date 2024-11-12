@@ -17,7 +17,7 @@ const poppins = Poppins({
 
 const LoadingScreen = () => {
   const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const isDark = resolvedTheme === "light";
 
   return (
     <motion.div
