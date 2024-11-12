@@ -159,7 +159,7 @@ export default function About({ isLoading }: AboutProps) {
           </motion.div>
 
           <div>
-            <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center text-gray-800 dark:text-gray-200">
+            <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center text-gray-800 dark:text-white">
               <Users className="mr-2 sm:mr-3 text-purple-500" size={20} />
               {content[language].experience}
             </h3>
