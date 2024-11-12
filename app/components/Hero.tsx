@@ -39,7 +39,7 @@ export default function Hero({ isLoading }: HeroProps) {
 
   return (
     <div className="relative">
-      <div className="absolute left-2">
+      {/* <div className="absolute left-2">
         <TooltipProvider delayDuration={0}>
           <Tooltip delayDuration={0}>
             <TooltipTrigger asChild>
@@ -63,7 +63,7 @@ export default function Hero({ isLoading }: HeroProps) {
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-      </div>
+      </div> */}
       <div className="w-full flex justify-center md:justify-end md:absolute md:top-4 md:right-4 z-10 gap-3 px-4 pt-4 md:pt-0 md:px-0">
         <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
           <motion.div
