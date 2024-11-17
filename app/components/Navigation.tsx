@@ -72,8 +72,8 @@ export default function Navigation() {
       projects: "Projects",
       contact: "Contact",
       // theme: "Change theme",
-      openMenu: "Open menu",
-      closeMenu: "Close menu",
+      openMenu: "Open",
+      closeMenu: "Close",
     },
     tr: {
       about: "Hakkımda",
