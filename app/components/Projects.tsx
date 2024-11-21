@@ -146,7 +146,7 @@ export default function Projects() {
   };
 
   const TechBadge = ({ tech }: { tech: string }) => (
-    <span className="inline-block bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded dark:from-blue-900 dark:to-purple-900 dark:text-blue-200">
+    <span className="inline-block bg-gradient-to-r from-blue-900 to-purple-900 text-gray-200 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded">
       {tech}
     </span>
   );
@@ -172,7 +172,7 @@ export default function Projects() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className={cn(
-              "border rounded-lg p-4 border-gray-200 dark:border-gray-700 transition-all duration-300",
+              "border rounded-lg p-4 border-gray-700 transition-all duration-300",
               expandedProject === index ? "shadow-md" : "hover:shadow-sm"
             )}
           >
@@ -182,7 +182,7 @@ export default function Projects() {
                 setExpandedProject(expandedProject === index ? null : index)
               }
             >
-              <h3 className="font-bold text-lg text-gray-800 dark:text-gray-200">
+              <h3 className="font-bold text-lg text-gray-100">
                 {project.name[language]}
               </h3>
               <div className="flex items-center space-x-2">
@@ -214,7 +214,7 @@ export default function Projects() {
                 transition={{ duration: 0.3 }}
                 className="mt-4"
               >
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                <p className="text-sm text-gray-300 mb-3">
                   {project.description[language]}
                 </p>
                 <div className="mb-3">
@@ -236,7 +236,7 @@ export default function Projects() {
         >
           <button
             onClick={() => setShowAllProjects(!showAllProjects)}
-            className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+            className="inline-flex items-center text-blue-400 hover:text-blue-300"
           >
             {showAllProjects
               ? content[language].showLess

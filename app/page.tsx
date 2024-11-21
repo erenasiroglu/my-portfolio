@@ -16,18 +16,13 @@ const poppins = Poppins({
 });
 
 const LoadingScreen = () => {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
-
   return (
     <motion.div
       key="loader"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center ${
-        isDark ? "bg-gray-900" : "bg-white"
-      }`}
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0a0a0a]"
     >
       <div className="flex space-x-4 mb-8">
         {[0, 0.2, 0.4].map((delay, i) => (
@@ -50,9 +45,7 @@ const LoadingScreen = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className={`text-2xl font-bold ${
-          isDark ? "text-white" : "text-gray-900"
-        }`}
+        className="text-2xl font-bold text-gray-100"
       >
         Welcome to my portfolio
       </motion.h1>

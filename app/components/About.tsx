@@ -147,19 +147,19 @@ export default function About({ isLoading }: AboutProps) {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="border-b pb-4 sm:pb-6 border-gray-200 dark:border-gray-700"
+            className="border-b pb-4 sm:pb-6 border-gray-700"
           >
-            <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 flex items-center text-gray-800 dark:text-gray-200">
+            <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 flex items-center text-gray-100">
               <Briefcase className="mr-2 sm:mr-3 text-blue-500" size={20} />
               {language === "en" ? "Web Developer" : "Web Geliştirici"}
             </h3>
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
               {content[language].description}
             </p>
           </motion.div>
 
           <div>
-            <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center text-gray-800 dark:text-white">
+            <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center text-gray-100">
               <Users className="mr-2 sm:mr-3 text-purple-500" size={20} />
               {content[language].experience}
             </h3>
@@ -171,7 +171,7 @@ export default function About({ isLoading }: AboutProps) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className={cn(
-                    "border rounded-lg p-3 sm:p-4 border-gray-200 dark:border-gray-700 transition-all duration-300",
+                    "border rounded-lg p-3 sm:p-4 border-gray-700 transition-all duration-300",
                     expandedExperience === index
                       ? "shadow-md"
                       : "hover:shadow-sm"
@@ -185,11 +185,11 @@ export default function About({ isLoading }: AboutProps) {
                       )
                     }
                   >
-                    <h4 className="font-bold text-base sm:text-lg text-gray-800 dark:text-gray-200">
+                    <h4 className="font-bold text-base sm:text-lg text-gray-100">
                       {exp.company}
                     </h4>
                     <div className="flex items-center">
-                      <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium mr-2">
+                      <span className="text-xs sm:text-sm text-gray-300 font-medium mr-2">
                         {exp.year}
                       </span>
                       {expandedExperience === index ? (
