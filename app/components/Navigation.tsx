@@ -140,7 +140,7 @@ export default function Navigation() {
           <Tooltip delayDuration={0}>
             <TooltipTrigger asChild>
               <motion.button
-                className="p-2 rounded-full transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center"
+                className="p-2 rounded-full transition-colors duration-300 hover:bg-gray-800/50 text-gray-300 hover:text-gray-100 flex items-center justify-center"
                 onClick={() => setIsCollapsed(!isCollapsed)}
               >
                 {isCollapsed ? (
@@ -178,7 +178,7 @@ export default function Navigation() {
                         {item.href ? (
                           <Link href={item.href} passHref>
                             <motion.a
-                              className="flex items-center justify-center w-9 h-9 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-800"
+                              className="flex items-center justify-center w-9 h-9 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-800/50 text-gray-300 hover:text-gray-100"
                               whileHover={{ scale: 1.1, rotate: 5 }}
                               whileTap={{ scale: 0.95 }}
                               title={item.label}
@@ -191,7 +191,7 @@ export default function Navigation() {
                           </Link>
                         ) : (
                           <motion.button
-                            className="flex items-center justify-center w-9 h-9 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-800"
+                            className="flex items-center justify-center w-9 h-9 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-800/50 text-gray-300 hover:text-gray-100"
                             whileHover={{ scale: 1.1, rotate: 5 }}
                             whileTap={{ scale: 0.95 }}
                             title={item.label}

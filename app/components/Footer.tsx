@@ -14,8 +14,8 @@ export default function Footer() {
   };
 
   return (
-    <footer className="py-8 mt-20 border-t border-gray-200 dark:border-gray-800">
-      <div className="container mx-auto px-4 text-center text-sm text-gray-600 dark:text-gray-400">
+    <footer className="py-8 mt-20 border-t border-gray-800">
+      <div className="container mx-auto px-4 text-center text-sm text-gray-300">
         <p>
           &copy; {currentYear} Eren Nasıroğlu. {content[language].rights}
         </p>

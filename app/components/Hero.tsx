@@ -107,11 +107,7 @@ export default function Hero({ isLoading }: HeroProps) {
         {isLoading ? (
           <Skeleton className="h-10 w-2/3 mx-auto mb-8" />
         ) : (
-          <p
-            className={`text-3xl mb-8 ${
-              theme === "dark" ? "text-gray-300" : "text-gray-600"
-            }`}
-          >
+          <p className="text-3xl mb-8 text-gray-300">
             {content[language].role}
           </p>
         )}

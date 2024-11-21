@@ -123,7 +123,7 @@ export default function About({ isLoading }: AboutProps) {
   ];
 
   const TechBadge = ({ tech }: { tech: string }) => (
-    <span className="inline-block bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded dark:from-blue-900 dark:to-purple-900 dark:text-blue-200">
+    <span className="inline-block bg-gradient-to-r from-blue-900 to-purple-900 text-gray-200 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded">
       {tech}
     </span>
   );
@@ -210,7 +210,7 @@ export default function About({ isLoading }: AboutProps) {
                       <p className="text-sm sm:text-base font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
                         {exp.role[language]}
                       </p>
-                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mb-2 sm:mb-3">
+                      <p className="text-sm sm:text-base text-gray-300 mb-2 sm:mb-3">
                         {exp.description[language]}
                       </p>
                       <div className="mb-2 sm:mb-3">
@@ -218,7 +218,7 @@ export default function About({ isLoading }: AboutProps) {
                           <TechBadge key={i} tech={tech} />
                         ))}
                       </div>
-                      <ul className="list-disc list-inside text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                      <ul className="list-disc list-inside text-xs sm:text-sm text-gray-300">
                         {exp.highlights[language].map((highlight, i) => (
                           <li key={i}>{highlight}</li>
                         ))}
