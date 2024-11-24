@@ -120,91 +120,80 @@ export default function Navigation() {
   ];
 
   return (
-    <motion.nav
-      drag
-      dragMomentum={false}
-      dragElastic={0}
-      onDragStart={() => setIsDragging(true)}
-      onDragEnd={() => {
-        setIsDragging(false);
-        localStorage.setItem(
-          "navPosition",
-          JSON.stringify({ x: x.get(), y: y.get() })
-        );
-      }}
-      style={{ x, y }}
-      className="fixed z-50 cursor-move flex items-center"
-    >
-      <motion.div className="flex items-center bg-nav-bg/80 text-nav-text backdrop-blur-md rounded-full shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700">
-        <TooltipProvider delayDuration={0}>
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <motion.button
-                className="p-2 rounded-full transition-colors duration-300 hover:bg-gray-800/50 text-gray-300 hover:text-gray-100 flex items-center justify-center"
-                onClick={() => setIsCollapsed(!isCollapsed)}
-              >
-                {isCollapsed ? (
-                  <ChevronRight className="w-5 h-5" />
-                ) : (
-                  <ChevronLeft className="w-5 h-5" />
-                )}
-              </motion.button>
-            </TooltipTrigger>
-            <TooltipContent
-              side="bottom"
-              className="bg-gray-800 text-white text-xs py-1 px-2 rounded"
-            >
-              <p>{isCollapsed ? t.openMenu : t.closeMenu}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <motion.ul
-          className={`flex items-center transition-all duration-300 ${
-            isCollapsed ? "w-0 overflow-hidden" : "w-auto p-1"
-          }`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <TooltipProvider>
+    <TooltipProvider>
+      <motion.nav
+        drag
+        dragMomentum={false}
+        dragElastic={0}
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={() => {
+          setIsDragging(false);
+          localStorage.setItem(
+            "navPosition",
+            JSON.stringify({ x: x.get(), y: y.get() })
+          );
+        }}
+        style={{ x, y }}
+        className="fixed z-50 cursor-move flex items-center bottom-6 left-1/2 -translate-x-1/2 md:transform-none md:left-auto md:bottom-auto"
+      >
+        <motion.div className="flex items-center bg-nav-bg/90 backdrop-blur-md rounded-full shadow-lg border border-gray-800">
+          {/* Collapse button - Hide on mobile */}
+          <div className="hidden md:block">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <motion.button
+                  className="p-2 rounded-full hover:bg-gray-800/50 text-gray-300"
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                >
+                  {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
+                </motion.button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                <p>{isCollapsed ? t.openMenu : t.closeMenu}</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+
+          {/* Menu Items */}
+          <motion.ul
+            className={`flex items-center p-1.5 ${
+              isCollapsed ? "md:w-0 md:overflow-hidden" : "w-auto"
+            }`}
+          >
             {menuItems.map((item, index) => (
-              <React.Fragment key={item.label || index}>
+              <React.Fragment key={index}>
                 {item.type === "separator" ? (
-                  <div className="mx-1 h-6 w-px bg-gray-300 dark:bg-gray-700" />
+                  <div className="hidden md:block mx-1 h-6 w-px bg-gray-700" />
                 ) : (
                   <motion.li className="mx-1">
                     <Tooltip>
                       <TooltipTrigger asChild>
                         {item.href ? (
-                          <Link href={item.href} passHref>
+                          <Link href={item.href}>
                             <motion.a
-                              className="flex items-center justify-center w-9 h-9 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-800/50 text-gray-300 hover:text-gray-100"
-                              whileHover={{ scale: 1.1, rotate: 5 }}
+                              className="flex items-center justify-center w-10 h-10 md:w-9 md:h-9 rounded-full hover:bg-gray-800/50 text-gray-300"
+                              whileHover={{ scale: 1.1 }}
                               whileTap={{ scale: 0.95 }}
-                              title={item.label}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => isDragging && e.preventDefault()}
                             >
-                              {item.icon && <item.icon className="w-4 h-4" />}
+                              {item.icon && (
+                                <item.icon className="w-5 h-5 md:w-4 md:h-4" />
+                              )}
                             </motion.a>
                           </Link>
                         ) : (
                           <motion.button
-                            className="flex items-center justify-center w-9 h-9 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-800/50 text-gray-300 hover:text-gray-100"
-                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            className="flex items-center justify-center w-10 h-10 md:w-9 md:h-9 rounded-full hover:bg-gray-800/50 text-gray-300"
+                            whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
-                            title={item.label}
                             onClick={item.action}
                           >
-                            {item.icon && <item.icon className="w-4 h-4" />}
+                            {item.icon && (
+                              <item.icon className="w-5 h-5 md:w-4 md:h-4" />
+                            )}
                           </motion.button>
                         )}
                       </TooltipTrigger>
-                      <TooltipContent
-                        side="bottom"
-                        className="bg-gray-800 text-white text-xs py-1 px-2 rounded"
-                      >
+                      <TooltipContent side="bottom">
                         <p>{item.label}</p>
                       </TooltipContent>
                     </Tooltip>
@@ -212,9 +201,9 @@ export default function Navigation() {
                 )}
               </React.Fragment>
             ))}
-          </TooltipProvider>
-        </motion.ul>
-      </motion.div>
-    </motion.nav>
+          </motion.ul>
+        </motion.div>
+      </motion.nav>
+    </TooltipProvider>
   );
 }
