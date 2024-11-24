@@ -57,10 +57,6 @@ export default function About({ isLoading }: AboutProps) {
         "Storybook",
         "Firebase",
       ],
-      highlights: {
-        en: ["Feature development", "Bug fixing"],
-        tr: ["Özellik geliştirme", "Hata düzeltme"],
-      },
     },
     {
       company: "GEMAS Pool Technology",
@@ -74,10 +70,6 @@ export default function About({ isLoading }: AboutProps) {
         tr: "Gemas, havuz teknolojileri üreten bir şirkettir. Bu projede, PHP Laravel kullanarak bir e-ticaret sitesi oluşturmada yer aldım.",
       },
       technologies: ["PHP", "Laravel", "MySQL"],
-      highlights: {
-        en: ["Frontend development", "Backend development"],
-        tr: ["Frontend geliştirme", "Backend geliştirme"],
-      },
     },
     {
       company: "Decktopus AI",
@@ -105,20 +97,6 @@ export default function About({ isLoading }: AboutProps) {
         "Data Analysis",
         "Feature Flag",
       ],
-      highlights: {
-        en: [
-          "Feature development",
-          "Software testing",
-          "Frontend development",
-          "Data analysis",
-        ],
-        tr: [
-          "Özellik geliştirme",
-          "Yazılım testi",
-          "Frontend geliştirme",
-          "Veri analizi",
-        ],
-      },
     },
   ];
 
@@ -218,11 +196,6 @@ export default function About({ isLoading }: AboutProps) {
                           <TechBadge key={i} tech={tech} />
                         ))}
                       </div>
-                      <ul className="list-disc list-inside text-xs sm:text-sm text-gray-300">
-                        {exp.highlights[language].map((highlight, i) => (
-                          <li key={i}>{highlight}</li>
-                        ))}
-                      </ul>
                     </motion.div>
                   )}
                 </motion.div>
