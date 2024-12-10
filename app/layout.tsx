@@ -17,11 +17,35 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Eren's Portfolio",
-  description: "Eren's personal portfolio website.",
-  icons: {
-    icon: "/favicon.ico",
+  title: "Eren Nasıroglu | Developer",
+  description:
+    "Frontend Developer specializing in React, Next.js, TypeScript, and modern web technologies. Freelance web developer based in Turkey offering professional web development services.",
+  keywords: [
+    "Eren Nasıroğlu",
+    "Eren Nasiroglu",
+    "Frontend Developer",
+    "Freelance Developer",
+    "React Developer",
+    "Next.js Developer",
+    "UI/UX Designer",
+    "Web Developer Turkey",
+    "TypeScript Developer",
+    "Frontend Freelancer",
+  ],
+  openGraph: {
+    title: "Eren Nasıroglu | Frontend Developer & UI/UX Designer",
+    description:
+      "Professional Frontend Developer specializing in React, Next.js, and modern web development. Available for freelance projects.",
+    url: "https://erenasiroglu.tech",
+    type: "website",
+    locale: "en_US",
   },
+  icons: [
+    {
+      rel: "icon",
+      url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'>🎄</text></svg>",
+    },
+  ],
 };
 
 export default function RootLayout({
