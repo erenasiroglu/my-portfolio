@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
-import { Github, ExternalLink, ChevronDown } from "lucide-react";
+import { Github, ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { cn } from "../lib/utils";
@@ -19,6 +19,7 @@ interface Project {
   technologies: string[];
   github_url: string;
   live_url?: string;
+  isNew: boolean;
 }
 
 const PROJECTS: Project[] = [
@@ -27,6 +28,7 @@ const PROJECTS: Project[] = [
       en: "Expense Tracker App with Expo and Firebase",
       tr: "Gider Takip Uygulaması (Expo ve Firebase)",
     },
+    isNew: true,
     description: {
       en: "This project is an expense tracker application developed using Expo and Firebase. The application allows users to add, delete, and update expenses, as well as view their total expenses.",
       tr: "Bu proje, Expo ve Firebase kullanılarak geliştirilen bir gider takip uygulamasıdır. Uygulama, kullanıcıların gider eklemelerine, silmelerine ve güncellemelerine izin verirken toplam giderlerini görüntülemelerine olanak tanır.",
@@ -172,12 +174,12 @@ export default function Projects() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
       id="projects"
-      className="py-12 max-w-3xl mx-auto px-4"
+      className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
     >
-      <h2 className="text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
         {content[language].title}
       </h2>
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {visibleProjects.map((project, index) => (
           <motion.div
             key={index}
@@ -185,38 +187,68 @@ export default function Projects() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className={cn(
-              "border rounded-lg p-4 border-gray-700 transition-all duration-300",
-              expandedProject === index ? "shadow-md" : "hover:shadow-sm"
+              "border rounded-lg p-3 border-gray-700 transition-all duration-300 relative",
+              expandedProject === index
+                ? "shadow-md border-blue-500/30"
+                : "hover:shadow-sm hover:border-purple-500/30",
+              project.isNew && "animate-border-pulse"
             )}
+            style={{
+              background: project.isNew
+                ? "linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(147, 51, 234, 0.05))"
+                : "transparent",
+            }}
           >
+            {project.isNew && (
+              <motion.div
+                initial={{ scale: 0, rotate: -15 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 10,
+                  duration: 0.5,
+                }}
+                className="absolute -top-3 -left-3 bg-blue-500/10 text-blue-500 text-xs font-medium px-2 py-0.5 rounded-md
+                border border-blue-500/20
+                backdrop-blur-sm"
+              >
+                New Project Alert 🚨
+              </motion.div>
+            )}
             <div
               className="flex justify-between items-center cursor-pointer"
               onClick={() =>
                 setExpandedProject(expandedProject === index ? null : index)
               }
             >
-              <h3 className="font-bold text-lg text-gray-100">
+              <h4 className="font-bold text-sm sm:text-base text-gray-100">
                 {project.name[language]}
-              </h3>
-              <div className="flex items-center space-x-2">
+              </h4>
+              <div className="flex items-center">
                 {project.live_url && (
                   <Link
                     href={project.live_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:text-blue-600"
+                    className="text-blue-500 hover:text-blue-600 mr-2"
                   >
-                    <ExternalLink className="w-5 h-5" />
+                    <ExternalLink size={16} />
                   </Link>
                 )}
                 <Link
                   href={project.github_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-gray-100"
+                  className="text-gray-300 hover:text-gray-100 mr-2"
                 >
-                  <Github className="w-5 h-5" />
+                  <Github size={16} />
                 </Link>
+                {expandedProject === index ? (
+                  <ChevronUp className="text-gray-500" size={16} />
+                ) : (
+                  <ChevronDown className="text-gray-500" size={16} />
+                )}
               </div>
             </div>
             {expandedProject === index && (
@@ -225,12 +257,12 @@ export default function Projects() {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className="mt-4"
+                className="mt-3"
               >
-                <p className="text-sm text-gray-300 mb-3">
+                <p className="text-sm sm:text-base text-gray-300 mb-2">
                   {project.description[language]}
                 </p>
-                <div className="mb-3">
+                <div className="mb-2">
                   {project.technologies.map((tech, i) => (
                     <TechBadge key={i} tech={tech} />
                   ))}
