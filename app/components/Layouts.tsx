@@ -1,5 +1,5 @@
-import Navigation from "./Navigation";
 import { ReactNode } from "react";
+import Header from "./Header";
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,10 +8,8 @@ interface LayoutProps {
 
 export default function Layout({ children, className }: LayoutProps) {
   return (
-    <div
-      className={`min-h-screen bg-background text-foreground transition-colors duration-300 ${className}`}
-    >
-      <Navigation />
+    <div className={className}>
+      <Header />
       <main className="container mx-auto pt-24">{children}</main>
     </div>
   );

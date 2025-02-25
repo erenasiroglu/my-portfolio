@@ -42,8 +42,8 @@ export default function About({ isLoading }: AboutProps) {
       company: "BeforeSunset AI",
       year: "07/2024 - Present",
       role: {
-        en: "Frontend Developer",
-        tr: "Frontend Geliştirici",
+        en: "Software Developer",
+        tr: "Yazılım Geliştirici",
       },
       description: {
         en: "BeforeSunset AI is a project that uses artificial intelligence to help users better plan their time. We develop solutions using React, Next.js, Zustand, and Supabase.",
@@ -62,8 +62,8 @@ export default function About({ isLoading }: AboutProps) {
       company: "GEMAS Pool Technology",
       year: "03/2024 - 06/2024",
       role: {
-        en: "Fullstack Developer",
-        tr: "Fullstack Geliştirici",
+        en: "Full Stack Developer",
+        tr: "Full Stack Geliştirici",
       },
       description: {
         en: "Gemas is a company that produces pool technologies. In this project, I was involved in creating an e-commerce site using PHP Laravel.",
@@ -112,7 +112,7 @@ export default function About({ isLoading }: AboutProps) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
       id="about"
-      className="py-12 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"
+      className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"
     >
       <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
         {content[language].title}
