@@ -19,7 +19,7 @@ interface Project {
   technologies: string[];
   github_url: string;
   live_url?: string;
-  isNew: boolean;
+  isNew?: boolean;
 }
 
 const PROJECTS: Project[] = [
@@ -41,6 +41,7 @@ const PROJECTS: Project[] = [
       en: "Chatbot with Ollama",
       tr: "AI Chatbot",
     },
+    isNew: false,
     description: {
       en: "This project is a chatbot application based on Ollama. The frontend is developed with React and Vite, while the backend uses the Hono framework running on Node.js.",
       tr: "Bu proje, Ollama tabanlı bir sohbet botu uygulamasıdır. Ön uç, React ve Vite ile geliştirilirken, arka uç, Node.js üzerinde çalışan Hono çerçevesini kullanır.",
