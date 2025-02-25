@@ -127,10 +127,6 @@ export default function About({ isLoading }: AboutProps) {
             transition={{ duration: 0.5 }}
             className="border-b pb-4 sm:pb-6 border-gray-700"
           >
-            <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 flex items-center text-gray-100">
-              <Briefcase className="mr-2 sm:mr-3 text-blue-500" size={20} />
-              {language === "en" ? "Web Developer" : "Web Geliştirici"}
-            </h3>
             <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
               {content[language].description}
             </p>

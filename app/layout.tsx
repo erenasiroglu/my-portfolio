@@ -18,7 +18,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Eren Nasıroglu | Developer",
+  title: "Eren Nasıroğlu | Portfolio",
   description:
     "Frontend Developer specializing in React, Next.js, TypeScript, and modern web technologies. Freelance web developer based in Turkey offering professional web development services.",
   keywords: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   icons: [
     {
       rel: "icon",
-      url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'>🎄</text></svg>",
+      url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'>🚀</text></svg>",
     },
   ],
 };

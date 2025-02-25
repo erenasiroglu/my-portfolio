@@ -24,7 +24,19 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     name: {
-      en: "Chatbot Ollama",
+      en: "Expense Tracker App with Expo and Firebase",
+      tr: "Gider Takip Uygulaması (Expo ve Firebase)",
+    },
+    description: {
+      en: "This project is an expense tracker application developed using Expo and Firebase. The application allows users to add, delete, and update expenses, as well as view their total expenses.",
+      tr: "Bu proje, Expo ve Firebase kullanılarak geliştirilen bir gider takip uygulamasıdır. Uygulama, kullanıcıların gider eklemelerine, silmelerine ve güncellemelerine izin verirken toplam giderlerini görüntülemelerine olanak tanır.",
+    },
+    technologies: ["Expo", "Firebase", "React Native", "Mobile Development"],
+    github_url: "https://github.com/erenasiroglu/expense-tracker-app",
+  },
+  {
+    name: {
+      en: "Chatbot with Ollama",
       tr: "AI Chatbot",
     },
     description: {
@@ -35,19 +47,6 @@ const PROJECTS: Project[] = [
     github_url: "https://github.com/erenasiroglu/chatbot-ollama",
     live_url:
       "https://react-ollama-frontend-erenasiroglus-projects.vercel.app/",
-  },
-  {
-    name: {
-      en: "Quiz App",
-      tr: "Sınav Uygulaması",
-    },
-    description: {
-      en: "Quiz app consisting of 10 questions with options A-B-C-D. No answer can be given in the first 10 seconds, and there is no return to the question. At the end of the quiz, a table is created where you can see your answers.",
-      tr: "10 sorudan oluşan, A-B-C-D seçenekleri olan sınav uygulaması. İlk 10 saniye içinde cevap verilemez ve soruya geri dönüş yapılamaz. Sınav sonunda cevaplarınızı görebileceğiniz bir tablo oluşturulur.",
-    },
-    technologies: ["React", "Javascript", "SCSS"],
-    github_url: "https://github.com/erenasiroglu/quiz-app",
-    live_url: "https://quiz-app-erenasiroglus-projects.vercel.app/",
   },
   {
     name: {
@@ -69,6 +68,20 @@ const PROJECTS: Project[] = [
     github_url: "https://github.com/erenasiroglu/allthestars",
     live_url: "https://all-the-stars.vercel.app/",
   },
+  {
+    name: {
+      en: "Quiz App",
+      tr: "Sınav Uygulaması",
+    },
+    description: {
+      en: "Quiz app consisting of 10 questions with options A-B-C-D. No answer can be given in the first 10 seconds, and there is no return to the question. At the end of the quiz, a table is created where you can see your answers.",
+      tr: "10 sorudan oluşan, A-B-C-D seçenekleri olan sınav uygulaması. İlk 10 saniye içinde cevap verilemez ve soruya geri dönüş yapılamaz. Sınav sonunda cevaplarınızı görebileceğiniz bir tablo oluşturulur.",
+    },
+    technologies: ["React", "Javascript", "SCSS"],
+    github_url: "https://github.com/erenasiroglu/quiz-app",
+    live_url: "https://quiz-app-erenasiroglus-projects.vercel.app/",
+  },
+
   {
     name: {
       en: "Landing Page",

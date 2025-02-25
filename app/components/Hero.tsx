@@ -24,13 +24,13 @@ export default function Hero({ isLoading }: HeroProps) {
 
   const content = {
     en: {
-      role: "Frontend Developer",
+      role: "Full Stack Developer",
       cta: "Discover my 2024 GitHub activity",
       upwork: "Available for Freelance",
       medium: "Read my blog on Medium",
     },
     tr: {
-      role: "Frontend Geliştirici",
+      role: "Full Stack Geliştirici",
       cta: "2024 GitHub aktivitemi keşfedin",
       upwork: "Freelance İşlere Açığım",
       medium: "Medium'da Yazılarım",
