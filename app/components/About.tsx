@@ -3,13 +3,9 @@ import { motion } from "framer-motion";
 import { Skeleton } from "./ui/skeleton";
 import { Briefcase, Users, ChevronDown, ChevronUp } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "../lib/utils";
 import { useLanguage } from "../contexts/LanguageContext";
-
-interface AboutProps {
-  isLoading: boolean;
-}
 
 interface AboutProps {
   isLoading: boolean;
@@ -21,6 +17,53 @@ export default function About({ isLoading }: AboutProps) {
     null
   );
   const { language } = useLanguage();
+
+  // About bölümü görüntüleme takibi
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Google Analytics için About görüntüleme takibi
+      if (window.gtag) {
+        window.gtag("event", "section_view", {
+          event_category: "engagement",
+          event_label: "about_section",
+          non_interaction: true,
+        });
+      }
+
+      // Hotjar için About görüntüleme takibi
+      if (window.hj) {
+        window.hj("event", "about_section_viewed");
+      }
+    }
+  }, []);
+
+  // Deneyim detaylarını genişletme olayını takip etme
+  const handleExperienceExpand = (index: number) => {
+    const newExpandedState = expandedExperience === index ? null : index;
+    setExpandedExperience(newExpandedState);
+
+    if (newExpandedState !== null && typeof window !== "undefined") {
+      const companyName = experiences[index].company;
+
+      // Google Analytics için deneyim genişletme takibi
+      if (window.gtag) {
+        window.gtag("event", "experience_expand", {
+          event_category: "engagement",
+          event_label: companyName,
+        });
+      }
+
+      // Hotjar için deneyim genişletme takibi
+      if (window.hj) {
+        window.hj(
+          "event",
+          `experience_expanded_${companyName
+            .replace(/\s+/g, "_")
+            .toLowerCase()}`
+        );
+      }
+    }
+  };
 
   const content = {
     en: {
@@ -153,11 +196,7 @@ export default function About({ isLoading }: AboutProps) {
                 >
                   <div
                     className="flex justify-between items-center cursor-pointer"
-                    onClick={() =>
-                      setExpandedExperience(
-                        expandedExperience === index ? null : index
-                      )
-                    }
+                    onClick={() => handleExperienceExpand(index)}
                   >
                     <h4 className="font-bold text-base sm:text-lg text-gray-100">
                       {exp.company}

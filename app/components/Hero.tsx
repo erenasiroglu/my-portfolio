@@ -13,6 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
+import { useEffect } from "react";
 
 interface HeroProps {
   isLoading: boolean;
@@ -21,6 +22,23 @@ interface HeroProps {
 export default function Hero({ isLoading }: HeroProps) {
   const { theme } = useTheme();
   const { language, setLanguage } = useLanguage();
+
+  // Hero görüntüleme takibi için useEffect
+  useEffect(() => {
+    // Google Analytics için Hero görüntüleme takibi
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "section_view", {
+        event_category: "engagement",
+        event_label: "hero_section",
+        non_interaction: true,
+      });
+    }
+
+    // Hotjar için Hero görüntüleme takibi
+    if (typeof window !== "undefined" && window.hj) {
+      window.hj("event", "hero_section_viewed");
+    }
+  }, []);
 
   const content = {
     en: {
@@ -73,6 +91,21 @@ export default function Hero({ isLoading }: HeroProps) {
                 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.2 }}
+                onClick={() => {
+                  // Google Analytics tracking
+                  if (window.gtag) {
+                    window.gtag("event", "click", {
+                      event_category: "engagement",
+                      event_label: "github_activity_cta",
+                      value: 1,
+                    });
+                  }
+
+                  // Hotjar tracking
+                  if (window.hj) {
+                    window.hj("event", "github_cta_clicked");
+                  }
+                }}
               >
                 <Button
                   className="text-sm md:text-base px-5 py-2.5 md:px-6 md:py-3 relative overflow-hidden

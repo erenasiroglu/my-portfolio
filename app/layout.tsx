@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
+import AnalyticsWrapper from "./components/AnalyticsWrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -68,7 +69,27 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-5MR05QF37C');
+            gtag('config', 'G-5MR05QF37C', {
+              'user_properties': {
+                'session_id': Date.now().toString(),
+                'referrer': document.referrer,
+                'screen_resolution': window.screen.width + 'x' + window.screen.height
+              },
+              'send_page_view': true,
+              'page_path': window.location.pathname,
+              'cookie_flags': 'max-age=7200;secure;samesite=none'
+            });
+            
+            // Track time spent on page
+            let startTime = new Date().getTime();
+            window.addEventListener('beforeunload', function() {
+              let endTime = new Date().getTime();
+              let timeSpent = (endTime - startTime) / 1000;
+              gtag('event', 'time_spent', {
+                'time_seconds': timeSpent,
+                'page': window.location.pathname
+              });
+            });
           `}
         </Script>
         <Script id="google-tag-manager" strategy="afterInteractive">
@@ -77,6 +98,21 @@ export default function RootLayout({
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-TDN595NX');`}
+        </Script>
+
+        {/* Hotjar Tracking Code */}
+        <Script id="hotjar-tracking" strategy="afterInteractive">
+          {`
+            (function (c, s, q, u, a, r, e) {
+                c.hj=c.hj||function(){(c.hj.q=c.hj.q||[]).push(arguments)};
+                c._hjSettings = { hjid: 5339816 };
+                r = s.getElementsByTagName('head')[0];
+                e = s.createElement('script');
+                e.async = true;
+                e.src = q + c._hjSettings.hjid + u;
+                r.appendChild(e);
+            })(window, document, 'https://static.hj.contentsquare.net/c/csq-', '.js', 5339816);
+          `}
         </Script>
       </head>
       <body
@@ -93,6 +129,7 @@ export default function RootLayout({
         <Providers>
           {children}
           <Analytics />
+          <AnalyticsWrapper />
         </Providers>
       </body>
     </html>

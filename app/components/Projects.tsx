@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 import { Github, ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "../lib/utils";
 
 interface Project {
@@ -148,6 +148,89 @@ export default function Projects() {
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
   const [showAllProjects, setShowAllProjects] = useState(false);
 
+  // Bileşen yüklendiğinde Analytics takibi
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Google Analytics için Projects görüntüleme takibi
+      if (window.gtag) {
+        window.gtag("event", "section_view", {
+          event_category: "engagement",
+          event_label: "projects_section",
+          non_interaction: true,
+        });
+      }
+
+      // Hotjar için Projects görüntüleme takibi
+      if (window.hj) {
+        window.hj("event", "projects_section_viewed");
+      }
+    }
+  }, []);
+
+  // Proje genişletme olayını takip etme
+  const handleProjectExpand = (index: number) => {
+    const newExpandedState = expandedProject === index ? null : index;
+    setExpandedProject(newExpandedState);
+
+    if (newExpandedState !== null && typeof window !== "undefined") {
+      const projectName = PROJECTS[index].name[language];
+
+      // Google Analytics için proje genişletme takibi
+      if (window.gtag) {
+        window.gtag("event", "project_expand", {
+          event_category: "engagement",
+          event_label: projectName,
+        });
+      }
+
+      // Hotjar için proje genişletme takibi
+      if (window.hj) {
+        window.hj("event", `project_expanded_${index}`);
+      }
+    }
+  };
+
+  // Proje bağlantı tıklamalarını takip etme
+  const trackLinkClick = (type: "github" | "live", projectName: string) => {
+    if (typeof window !== "undefined") {
+      // Google Analytics için link tıklama takibi
+      if (window.gtag) {
+        window.gtag("event", "link_click", {
+          event_category: "outbound",
+          event_label: `${type}_link_${projectName}`,
+          transport_type: "beacon",
+        });
+      }
+
+      // Hotjar için link tıklama takibi
+      if (window.hj) {
+        window.hj("event", `${type}_link_clicked_${projectName}`);
+      }
+    }
+  };
+
+  // "Daha fazla göster" butonunu takip etme
+  const handleShowMoreToggle = () => {
+    setShowAllProjects(!showAllProjects);
+
+    if (typeof window !== "undefined") {
+      const action = !showAllProjects ? "show_more" : "show_less";
+
+      // Google Analytics için "daha fazla göster" takibi
+      if (window.gtag) {
+        window.gtag("event", action, {
+          event_category: "engagement",
+          event_label: "projects",
+        });
+      }
+
+      // Hotjar için "daha fazla göster" takibi
+      if (window.hj) {
+        window.hj("event", `projects_${action}`);
+      }
+    }
+  };
+
   const content = {
     en: {
       title: "Projects",
@@ -219,9 +302,7 @@ export default function Projects() {
             )}
             <div
               className="flex justify-between items-center cursor-pointer"
-              onClick={() =>
-                setExpandedProject(expandedProject === index ? null : index)
-              }
+              onClick={() => handleProjectExpand(index)}
             >
               <h4 className="font-bold text-sm sm:text-base text-gray-100">
                 {project.name[language]}
@@ -233,6 +314,10 @@ export default function Projects() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-500 hover:text-blue-600 mr-2"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      trackLinkClick("live", project.name[language]);
+                    }}
                   >
                     <ExternalLink size={16} />
                   </Link>
@@ -242,6 +327,10 @@ export default function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-gray-100 mr-2"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    trackLinkClick("github", project.name[language]);
+                  }}
                 >
                   <Github size={16} />
                 </Link>
@@ -281,7 +370,7 @@ export default function Projects() {
           className="mt-6 text-center"
         >
           <button
-            onClick={() => setShowAllProjects(!showAllProjects)}
+            onClick={handleShowMoreToggle}
             className="inline-flex items-center text-blue-400 hover:text-blue-300"
           >
             {showAllProjects
