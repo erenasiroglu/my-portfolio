@@ -11,6 +11,23 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  /* Prevent FOUC */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Show body when JavaScript loads */
+body.loaded {
+  opacity: 1;
+}
+
+/* Initial loading state */
+.loading-prevent-fouc {
+  visibility: hidden;
+}
+
+.loading-prevent-fouc.loaded {
+  visibility: visible;
 }
 
 @layer utilities {
@@ -19,18 +36,134 @@ body {
   }
 }
 
+/* Improved gradient animation */
 @keyframes gradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
+/* Enhanced border pulse with smoother transitions */
 @keyframes border-pulse {
-    0% { border-color: rgba(59, 130, 246, 0.3); }
-    50% { border-color: rgba(147, 51, 234, 0.3); }
-    100% { border-color: rgba(59, 130, 246, 0.3); }
-   }
- 
-   .animate-border-pulse {
-  animation: border-pulse 3s infinite;
+  0% { 
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
   }
+  50% { 
+    border-color: rgba(147, 51, 234, 0.3);
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.2);
+  }
+  100% { 
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.animate-border-pulse {
+  animation: border-pulse 3s infinite;
+}
+
+/* Loading spinner with smooth rotation */
+@keyframes loading-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-loading-spin {
+  animation: loading-spin 1s linear infinite;
+}
+
+/* Floating particles animation */
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+}
+
+.animate-float-up {
+  animation: float-up 3s infinite ease-in-out;
+}
+
+/* Progress bar glow effect */
+@keyframes progress-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.6);
+  }
+}
+
+.animate-progress-glow {
+  animation: progress-glow 2s infinite;
+}
+
+/* Pulse scale animation for loading elements */
+@keyframes pulse-scale {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.animate-pulse-scale {
+  animation: pulse-scale 2s infinite;
+}
+
+/* Stagger fade-in for list items */
+@keyframes stagger-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-stagger-fade-in {
+  animation: stagger-fade-in 0.6s ease-out forwards;
+}
+
+/* Skeleton shimmer effect */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200px 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+/* Enhanced shimmer animation for skeleton */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

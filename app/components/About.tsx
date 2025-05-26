@@ -82,15 +82,35 @@ export default function About({ isLoading }: AboutProps) {
 
   const experiences = [
     {
+      company: "Pulse FinTech",
+      year: "05/2024 - Present",
+      role: {
+        en: "Full Stack Developer",
+        tr: "Full Stack Geliştirici",
+      },
+      description: {
+        en: "Pulse FinTech is a financial technology company where I develop mobile and web applications. I work with React Native for mobile development, JavaScript for frontend solutions, and Express.js for backend services, creating comprehensive fintech solutions.",
+        tr: "Pulse FinTech, mobil ve web uygulamaları geliştirdiğim bir finansal teknoloji şirketidir. Mobil geliştirme için React Native, frontend çözümleri için JavaScript ve backend servisleri için Express.js kullanarak kapsamlı fintech çözümleri oluşturuyorum.",
+      },
+      technologies: [
+        "React Native",
+        "JavaScript",
+        "Express.js",
+        "REST API",
+        "Mobile Development",
+        "FinTech",
+      ],
+    },
+    {
       company: "BeforeSunset AI",
-      year: "07/2024 - Present",
+      year: "07/2023 - 04/2024",
       role: {
         en: "Software Developer",
         tr: "Yazılım Geliştirici",
       },
       description: {
-        en: "BeforeSunset AI is a project that uses artificial intelligence to help users better plan their time. We develop solutions using React, Next.js, Zustand, and Supabase.",
-        tr: "BeforeSunset AI, kullanıcıların zamanlarını daha iyi planlamalarına yardımcı olmak için yapay zeka kullanan bir projedir. React, Next.js, Zustand ve Supabase kullanarak çözümler geliştiriyoruz.",
+        en: "BeforeSunset AI is a project that uses artificial intelligence to help users better plan their time. I developed solutions using React, Next.js, Zustand, and Supabase, focusing on AI-powered productivity tools.",
+        tr: "BeforeSunset AI, kullanıcıların zamanlarını daha iyi planlamalarına yardımcı olmak için yapay zeka kullanan bir projedir. React, Next.js, Zustand ve Supabase kullanarak AI destekli verimlilik araçlarına odaklanarak çözümler geliştirdim.",
       },
       technologies: [
         "React",
@@ -99,6 +119,7 @@ export default function About({ isLoading }: AboutProps) {
         "Supabase",
         "Storybook",
         "Firebase",
+        "AI Integration",
       ],
     },
     {
@@ -151,93 +172,175 @@ export default function About({ isLoading }: AboutProps) {
 
   return (
     <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       id="about"
       className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"
     >
-      <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
-        {content[language].title}
-      </h2>
       {isLoading ? (
-        <Skeleton className="h-64 w-full" />
-      ) : (
         <div className="space-y-6 sm:space-y-8">
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="border-b pb-4 sm:pb-6 border-gray-700"
-          >
-            <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-              {content[language].description}
-            </p>
-          </motion.div>
+          {/* Title skeleton */}
+          <Skeleton className="h-8 w-48 mb-6 sm:mb-8" />
 
+          {/* Description skeleton */}
+          <div className="border-b pb-4 sm:pb-6 border-gray-700">
+            <Skeleton className="h-4 w-full mb-3" />
+            <Skeleton className="h-4 w-5/6 mb-3" />
+            <Skeleton className="h-4 w-4/5 mb-3" />
+            <Skeleton className="h-4 w-3/4" />
+          </div>
+
+          {/* Experience section skeleton */}
           <div>
-            <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center text-gray-100">
-              <Users className="mr-2 sm:mr-3 text-purple-500" size={20} />
-              {content[language].experience}
-            </h3>
+            <Skeleton className="h-6 w-56 mb-4 sm:mb-6" />
             <div className="space-y-3 sm:space-y-4">
-              {experiences.map((exp, index) => (
-                <motion.div
+              {[...Array(3)].map((_, index) => (
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={cn(
-                    "border rounded-lg p-3 sm:p-4 border-gray-700 transition-all duration-300",
-                    expandedExperience === index
-                      ? "shadow-md"
-                      : "hover:shadow-sm"
-                  )}
+                  className="border rounded-lg p-3 sm:p-4 border-gray-700"
                 >
-                  <div
-                    className="flex justify-between items-center cursor-pointer"
-                    onClick={() => handleExperienceExpand(index)}
-                  >
-                    <h4 className="font-bold text-base sm:text-lg text-gray-100">
-                      {exp.company}
-                    </h4>
-                    <div className="flex items-center">
-                      <span className="text-xs sm:text-sm text-gray-300 font-medium mr-2">
-                        {exp.year}
-                      </span>
-                      {expandedExperience === index ? (
-                        <ChevronUp className="text-gray-500" size={16} />
-                      ) : (
-                        <ChevronDown className="text-gray-500" size={16} />
-                      )}
-                    </div>
+                  <div className="flex justify-between items-center">
+                    <Skeleton className="h-5 w-40" />
+                    <Skeleton className="h-4 w-24" />
                   </div>
-                  {expandedExperience === index && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="mt-3 sm:mt-4"
-                    >
-                      <p className="text-sm sm:text-base font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
-                        {exp.role[language]}
-                      </p>
-                      <p className="text-sm sm:text-base text-gray-300 mb-2 sm:mb-3">
-                        {exp.description[language]}
-                      </p>
-                      <div className="mb-2 sm:mb-3">
-                        {exp.technologies.map((tech, i) => (
-                          <TechBadge key={i} tech={tech} />
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
         </div>
+      ) : (
+        <>
+          <motion.h2
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
+          >
+            {content[language].title}
+          </motion.h2>
+
+          <div className="space-y-6 sm:space-y-8">
+            <motion.div
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="border-b pb-4 sm:pb-6 border-gray-700"
+            >
+              <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                {content[language].description}
+              </p>
+            </motion.div>
+
+            <div>
+              <motion.h3
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center text-gray-100"
+              >
+                <Users className="mr-2 sm:mr-3 text-purple-500" size={20} />
+                {content[language].experience}
+              </motion.h3>
+              <div className="space-y-3 sm:space-y-4">
+                {experiences.map((exp, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.5 + index * 0.1,
+                      ease: "easeOut",
+                    }}
+                    whileHover={{
+                      scale: 1.02,
+                      transition: { duration: 0.2 },
+                    }}
+                    className={cn(
+                      "border rounded-lg p-3 sm:p-4 border-gray-700 transition-all duration-300 cursor-pointer",
+                      expandedExperience === index
+                        ? "shadow-lg border-purple-500/30 bg-gray-900/30"
+                        : "hover:shadow-md hover:border-gray-600"
+                    )}
+                  >
+                    <div
+                      className="flex justify-between items-center"
+                      onClick={() => handleExperienceExpand(index)}
+                    >
+                      <h4 className="font-bold text-base sm:text-lg text-gray-100">
+                        {exp.company}
+                      </h4>
+                      <div className="flex items-center">
+                        <span className="text-xs sm:text-sm text-gray-300 font-medium mr-2">
+                          {exp.year}
+                        </span>
+                        <motion.div
+                          animate={{
+                            rotate: expandedExperience === index ? 180 : 0,
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <ChevronDown className="text-gray-500" size={16} />
+                        </motion.div>
+                      </div>
+                    </div>
+                    {expandedExperience === index && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{
+                          duration: 0.4,
+                          ease: "easeInOut",
+                        }}
+                        className="mt-3 sm:mt-4 overflow-hidden"
+                      >
+                        <motion.p
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.1 }}
+                          className="text-sm sm:text-base font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-2"
+                        >
+                          {exp.role[language]}
+                        </motion.p>
+                        <motion.p
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2 }}
+                          className="text-sm sm:text-base text-gray-300 mb-2 sm:mb-3"
+                        >
+                          {exp.description[language]}
+                        </motion.p>
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.3 }}
+                          className="mb-2 sm:mb-3"
+                        >
+                          {exp.technologies.map((tech, i) => (
+                            <motion.span
+                              key={i}
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{
+                                delay: 0.3 + i * 0.05,
+                                duration: 0.3,
+                              }}
+                              className="inline-block bg-gradient-to-r from-blue-900 to-purple-900 text-gray-200 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded hover:from-blue-800 hover:to-purple-800 transition-all duration-200"
+                            >
+                              {tech}
+                            </motion.span>
+                          ))}
+                        </motion.div>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </motion.section>
   );

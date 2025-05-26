@@ -54,74 +54,89 @@ export default function Hero({ isLoading }: HeroProps) {
   return (
     <div className="relative px-4 md:px-0">
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="pt-32 md:pt-40 pb-20 md:pb-40 text-center"
       >
         {isLoading ? (
-          <Skeleton className="h-20 w-3/4 mx-auto mb-4" />
-        ) : (
-          <h1 className="text-[72px] md:text-[68px] font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
-            Eren Nasıroglu
-          </h1>
-        )}
-        {isLoading ? (
-          <Skeleton className="h-10 w-2/3 mx-auto mb-8" />
-        ) : (
-          <p className="text-xl md:text-3xl mb-8 text-gray-300">
-            {content[language].role}
-          </p>
-        )}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        >
-          {isLoading ? (
-            <Skeleton className="h-12 w-40 mx-auto" />
-          ) : (
-            <Link
-              href="https://github.com/erenasiroglu?tab=overview&from=2025-02-01&to=2025-02-25"
-              passHref
-            >
-              <motion.div
-                whileHover={{
-                  scale: 1.02,
-                }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-                onClick={() => {
-                  // Google Analytics tracking
-                  if (window.gtag) {
-                    window.gtag("event", "click", {
-                      event_category: "engagement",
-                      event_label: "github_activity_cta",
-                      value: 1,
-                    });
-                  }
+          <div className="flex flex-col items-center">
+            {/* Name skeleton */}
+            <Skeleton className="h-16 md:h-20 w-96 max-w-full mx-auto mb-4" />
 
-                  // Hotjar tracking
-                  if (window.hj) {
-                    window.hj("event", "github_cta_clicked");
-                  }
-                }}
+            {/* Role skeleton */}
+            <Skeleton className="h-8 md:h-10 w-64 max-w-full mx-auto mb-8" />
+
+            {/* CTA Button skeleton */}
+            <Skeleton className="h-12 w-56 mx-auto rounded-md" />
+          </div>
+        ) : (
+          <>
+            <motion.h1
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="text-[72px] md:text-[68px] font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
+            >
+              Eren Nasıroglu
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="text-xl md:text-3xl mb-8 text-gray-300"
+            >
+              {content[language].role}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              <Link
+                href="https://github.com/erenasiroglu?tab=overview&from=2025-02-01&to=2025-02-25"
+                passHref
               >
-                <Button
-                  className="text-sm md:text-base px-5 py-2.5 md:px-6 md:py-3 relative overflow-hidden
-                    before:absolute before:inset-0 
-                    before:bg-gradient-to-r before:from-blue-600 before:via-purple-600 before:to-blue-600
-                    before:animate-[gradient_3s_ease_infinite]
-                    before:bg-[length:200%_100%]
-                    before:z-[-1]
-                    text-white rounded-md transition-all duration-300"
+                <motion.div
+                  whileHover={{
+                    scale: 1.02,
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={() => {
+                    // Google Analytics tracking
+                    if (window.gtag) {
+                      window.gtag("event", "click", {
+                        event_category: "engagement",
+                        event_label: "github_activity_cta",
+                        value: 1,
+                      });
+                    }
+
+                    // Hotjar tracking
+                    if (window.hj) {
+                      window.hj("event", "github_cta_clicked");
+                    }
+                  }}
                 >
-                  {content[language].cta}
-                </Button>
-              </motion.div>
-            </Link>
-          )}
-        </motion.div>
+                  <Button
+                    className="text-sm md:text-base px-5 py-2.5 md:px-6 md:py-3 relative overflow-hidden
+                      before:absolute before:inset-0 
+                      before:bg-gradient-to-r before:from-blue-600 before:via-purple-600 before:to-blue-600
+                      before:animate-[gradient_3s_ease_infinite]
+                      before:bg-[length:200%_100%]
+                      before:z-[-1]
+                      text-white rounded-md transition-all duration-300"
+                  >
+                    {content[language].cta}
+                  </Button>
+                </motion.div>
+              </Link>
+            </motion.div>
+          </>
+        )}
       </motion.section>
     </div>
   );

@@ -60,6 +60,22 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        {/* FOUC Prevention Script */}
+        <Script id="fouc-prevention" strategy="beforeInteractive">
+          {`
+            (function() {
+              // Add loaded class to body when DOM is ready
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                  document.body.classList.add('loaded');
+                });
+              } else {
+                document.body.classList.add('loaded');
+              }
+            })();
+          `}
+        </Script>
+
         <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-5MR05QF37C"
