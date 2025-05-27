@@ -51,13 +51,8 @@ export default function LoadingScreen() {
             stiffness: 100,
           }}
           className="mb-8"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 tracking-wide">
-            Eren Nasıroğlu
-          </h1>
-        </motion.div>
+        ></motion.div>
 
-        {/* Modern loading indicator */}
         <div className="relative w-64 h-1 bg-gray-800 rounded-full overflow-hidden mb-6">
           <motion.div
             className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"
@@ -67,7 +62,6 @@ export default function LoadingScreen() {
           />
         </div>
 
-        {/* Pulse effect */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: [0, 1, 0], opacity: [0, 0.6, 0] }}
@@ -86,7 +80,7 @@ export default function LoadingScreen() {
           transition={{ delay: 0.3, duration: 0.5 }}
           className="text-sm text-gray-400 font-medium tracking-widest"
         >
-          LOADING PORTFOLIO
+          Building interface...
         </motion.p>
 
         {/* Progress percentage */}

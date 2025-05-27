@@ -38,67 +38,7 @@ export default function LoadingScreen() {
       transition={{ duration: 0.6, ease: "easeInOut" }}
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-[#0a0a0a] via-[#0f0f0f] to-[#1a1a1a]"
     >
-      {/* Ana container */}
-      <div className="relative flex flex-col items-center">
-        {/* Logo/İsim animasyonu */}
-        <motion.div
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{
-            duration: 0.8,
-            ease: "easeOut",
-            type: "spring",
-            stiffness: 100,
-          }}
-          className="mb-8"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 tracking-wide">
-            Eren Nasıroğlu
-          </h1>
-        </motion.div>
-
-        {/* Modern loading indicator */}
-        <div className="relative w-64 h-1 bg-gray-800 rounded-full overflow-hidden mb-6">
-          <motion.div
-            className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.1, ease: "easeInOut" }}
-          />
-        </div>
-
-        {/* Pulse effect */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: [0, 1, 0], opacity: [0, 0.6, 0] }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
-        />
-
-        {/* Loading text */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="text-sm text-gray-400 font-medium tracking-widest"
-        >
-          LOADING PORTFOLIO
-        </motion.p>
-
-        {/* Progress percentage */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="mt-2 text-xs text-gray-500 font-mono"
-        >
-          {progress}%
-        </motion.div>
-      </div>
+      <div className="relative flex flex-col items-center"></div>
 
       {/* Background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

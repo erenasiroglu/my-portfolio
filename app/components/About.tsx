@@ -83,7 +83,7 @@ export default function About({ isLoading }: AboutProps) {
   const experiences = [
     {
       company: "Pulse FinTech",
-      year: "05/2024 - Present",
+      year: "05/2025 - Present",
       role: {
         en: "Full Stack Developer",
         tr: "Full Stack Geliştirici",
