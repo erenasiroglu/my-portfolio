@@ -103,7 +103,7 @@ export default function About({ isLoading }: AboutProps) {
     },
     {
       company: "BeforeSunset AI",
-      year: "07/2023 - 04/2024",
+      year: "06/2024 - 05/2025",
       role: {
         en: "Software Developer",
         tr: "Yazılım Geliştirici",
