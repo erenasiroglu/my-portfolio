@@ -77,10 +77,10 @@ export default function Contact() {
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.98 }}
           className="flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 
-            bg-gradient-to-r from-purple-600 to-cyan-600 
-            hover:from-purple-500 hover:to-cyan-500
+            bg-gradient-to-r from-blue-700 to-cyan-600 
+            hover:from-blue-600 hover:to-cyan-500
             text-white rounded-xl font-semibold
-            shadow-lg shadow-purple-500/25 hover:shadow-xl hover:shadow-purple-500/40
+            shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40
             transition-all duration-300"
         >
           <Mail className="w-5 h-5 icon-base" />

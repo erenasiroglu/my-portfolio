@@ -40,33 +40,11 @@ export default function LoadingScreen() {
     >
       {/* Ana container */}
       <div className="relative flex flex-col items-center">
-        {/* Logo/İsim animasyonu */}
-        <motion.div
-          initial={{ scale: 0.5, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            ease: [0.16, 1, 0.3, 1],
-            type: "spring",
-            stiffness: 100,
-          }}
-          className="mb-12"
-        >
-          <motion.h1
-            className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            Eren Nasıroğlu
-          </motion.h1>
-        </motion.div>
-
         {/* Modern progress bar with glow */}
         <div className="relative w-72 md:w-80 mb-8">
           <div className="relative h-1 bg-gray-900/50 rounded-full overflow-hidden backdrop-blur-sm">
             <motion.div
-              className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full shadow-lg shadow-blue-500/50"
+              className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 rounded-full shadow-lg shadow-blue-500/50"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.1, ease: "easeInOut" }}
@@ -85,7 +63,7 @@ export default function LoadingScreen() {
           </div>
           {/* Glow effect */}
           <motion.div
-            className="absolute inset-0 h-1 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-cyan-500/30 rounded-full blur-md"
+            className="absolute inset-0 h-1 bg-gradient-to-r from-blue-500/30 via-blue-400/30 to-cyan-500/30 rounded-full blur-md"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.1, ease: "easeInOut" }}

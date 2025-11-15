@@ -245,7 +245,7 @@ export default function Projects() {
   };
 
   const TechBadge = ({ tech }: { tech: string }) => (
-    <span className="inline-block bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 text-gray-300 text-xs font-medium mr-2 mb-2 px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
+    <span className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium mr-2 mb-2 px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
       {tech}
     </span>
   );

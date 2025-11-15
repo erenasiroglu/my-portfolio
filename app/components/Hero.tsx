@@ -69,7 +69,7 @@ export default function Hero({ isLoading }: HeroProps) {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-400 via-blue-600 to-purple-700 drop-shadow-[0_0_30px_rgba(59,130,246,0.6)]"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-300 via-blue-500 to-cyan-400 drop-shadow-[0_0_30px_rgba(59,130,246,0.6)]"
             >
               Eren Nasıroglu
             </motion.h1>
@@ -117,11 +117,11 @@ export default function Hero({ isLoading }: HeroProps) {
                 >
                   <Button
                     className="text-base md:text-lg px-8 py-4 md:px-10 md:py-5 relative overflow-hidden
-                      bg-gradient-to-r from-blue-800 via-purple-800 to-blue-900
-                      hover:from-blue-700 hover:via-purple-700 hover:to-blue-800
+                      bg-gradient-to-r from-blue-800 via-blue-700 to-cyan-700
+                      hover:from-blue-700 hover:via-blue-600 hover:to-cyan-600
                       text-white rounded-xl font-semibold
                       shadow-lg shadow-blue-900/40
-                      hover:shadow-xl hover:shadow-purple-900/50
+                      hover:shadow-xl hover:shadow-blue-900/50
                       transition-all duration-300 ease-out
                       border border-gray-700/50"
                   >

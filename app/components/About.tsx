@@ -166,7 +166,7 @@ export default function About({ isLoading }: AboutProps) {
   ];
 
   const TechBadge = ({ tech }: { tech: string }) => (
-    <span className="inline-block bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 text-gray-300 text-xs font-medium mr-2 mb-2 px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-colors">
+    <span className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium mr-2 mb-2 px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
       {tech}
     </span>
   );
@@ -240,7 +240,7 @@ export default function About({ isLoading }: AboutProps) {
                 transition={{ duration: 0.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="text-xl md:text-2xl font-semibold mb-8 md:mb-10 flex items-center text-gray-100"
               >
-                <Users className="mr-3 text-purple-400 icon-lg" />
+                <Users className="mr-3 text-blue-400 icon-lg" />
                 {content[language].experience}
               </motion.h3>
               <div className="space-y-4 md:space-y-5">
@@ -261,7 +261,7 @@ export default function About({ isLoading }: AboutProps) {
                     className={cn(
                       "card-modern p-5 md:p-6 cursor-pointer",
                       expandedExperience === index
-                        ? "border-purple-500/50 shadow-lg shadow-purple-500/10 bg-gray-900/50"
+                        ? "border-blue-500/50 shadow-lg shadow-blue-500/10 bg-gray-900/50"
                         : ""
                     )}
                   >
