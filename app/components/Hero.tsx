@@ -6,13 +6,6 @@ import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 import { useTheme } from "next-themes";
 import { useLanguage } from "../contexts/LanguageContext";
-import { Globe } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
 import { useEffect } from "react";
 
 interface HeroProps {
@@ -56,27 +49,27 @@ export default function Hero({ isLoading }: HeroProps) {
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="pt-32 md:pt-40 pb-20 md:pb-40 text-center"
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="pt-32 md:pt-48 pb-24 md:pb-32 text-center"
       >
         {isLoading ? (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center gap-6">
             {/* Name skeleton */}
-            <Skeleton className="h-16 md:h-20 w-96 max-w-full mx-auto mb-4" />
+            <Skeleton className="h-20 md:h-24 w-96 max-w-full mx-auto rounded-lg" />
 
             {/* Role skeleton */}
-            <Skeleton className="h-8 md:h-10 w-64 max-w-full mx-auto mb-8" />
+            <Skeleton className="h-10 md:h-12 w-72 max-w-full mx-auto rounded-lg" />
 
             {/* CTA Button skeleton */}
-            <Skeleton className="h-12 w-56 mx-auto rounded-md" />
+            <Skeleton className="h-14 w-64 mx-auto rounded-xl" />
           </div>
         ) : (
           <>
             <motion.h1
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="text-[72px] md:text-[68px] font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-400 via-blue-600 to-purple-700 drop-shadow-[0_0_30px_rgba(59,130,246,0.6)]"
             >
               Eren Nasıroglu
             </motion.h1>
@@ -84,8 +77,8 @@ export default function Hero({ isLoading }: HeroProps) {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-xl md:text-3xl mb-8 text-gray-300"
+              transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="text-xl md:text-2xl lg:text-3xl mb-12 md:mb-16 text-gray-300 font-medium tracking-wide"
             >
               {content[language].role}
             </motion.p>
@@ -93,7 +86,7 @@ export default function Hero({ isLoading }: HeroProps) {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
+              transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
                 href="https://github.com/erenasiroglu?tab=overview&from=2025-02-01&to=2025-02-25"
@@ -101,10 +94,11 @@ export default function Hero({ isLoading }: HeroProps) {
               >
                 <motion.div
                   whileHover={{
-                    scale: 1.02,
+                    scale: 1.05,
+                    y: -2,
                   }}
                   whileTap={{ scale: 0.98 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                   onClick={() => {
                     // Google Analytics tracking
                     if (window.gtag) {
@@ -122,15 +116,16 @@ export default function Hero({ isLoading }: HeroProps) {
                   }}
                 >
                   <Button
-                    className="text-sm md:text-base px-5 py-2.5 md:px-6 md:py-3 relative overflow-hidden
-                      before:absolute before:inset-0 
-                      before:bg-gradient-to-r before:from-blue-600 before:via-purple-600 before:to-blue-600
-                      before:animate-[gradient_3s_ease_infinite]
-                      before:bg-[length:200%_100%]
-                      before:z-[-1]
-                      text-white rounded-md transition-all duration-300"
+                    className="text-base md:text-lg px-8 py-4 md:px-10 md:py-5 relative overflow-hidden
+                      bg-gradient-to-r from-blue-800 via-purple-800 to-blue-900
+                      hover:from-blue-700 hover:via-purple-700 hover:to-blue-800
+                      text-white rounded-xl font-semibold
+                      shadow-lg shadow-blue-900/40
+                      hover:shadow-xl hover:shadow-purple-900/50
+                      transition-all duration-300 ease-out
+                      border border-gray-700/50"
                   >
-                    {content[language].cta}
+                    <span className="relative z-10">{content[language].cta}</span>
                   </Button>
                 </motion.div>
               </Link>

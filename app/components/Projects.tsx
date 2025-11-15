@@ -245,7 +245,7 @@ export default function Projects() {
   };
 
   const TechBadge = ({ tech }: { tech: string }) => (
-    <span className="inline-block bg-gradient-to-r from-blue-900 to-purple-900 text-gray-200 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded">
+    <span className="inline-block bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 text-gray-300 text-xs font-medium mr-2 mb-2 px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
       {tech}
     </span>
   );
@@ -256,31 +256,36 @@ export default function Projects() {
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       id="projects"
-      className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
+      className="max-w-4xl mx-auto container-padding section-padding"
     >
-      <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 gradient-text text-center"
+      >
         {content[language].title}
-      </h2>
-      <div className="space-y-3 sm:space-y-4">
+      </motion.h2>
+      <div className="space-y-4 md:space-y-6">
         {visibleProjects.map((project, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
             className={cn(
-              "border rounded-lg p-3 border-gray-700 transition-all duration-300 relative",
+              "card-modern p-5 md:p-6 relative group",
               expandedProject === index
-                ? "shadow-md border-blue-500/30"
-                : "hover:shadow-sm hover:border-purple-500/30",
-              project.isNew && "animate-border-pulse"
+                ? "border-blue-500/50 shadow-lg shadow-blue-500/10"
+                : "",
+              project.isNew && "border-blue-500/30"
             )}
             style={{
               background: project.isNew
-                ? "linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(147, 51, 234, 0.05))"
-                : "transparent",
+                ? "linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(6, 182, 212, 0.08))"
+                : undefined,
             }}
           >
             {project.isNew && (
@@ -293,52 +298,53 @@ export default function Projects() {
                   damping: 10,
                   duration: 0.5,
                 }}
-                className="absolute -top-3 -left-3 bg-blue-500/10 text-blue-500 text-xs font-medium px-2 py-0.5 rounded-md
-                border border-blue-500/20
-                backdrop-blur-sm"
+                className="absolute -top-2.5 -left-2.5 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full
+                border border-blue-500/30
+                backdrop-blur-sm shadow-lg"
               >
-                New Project Alert 🚨
+                New
               </motion.div>
             )}
             <div
               className="flex justify-between items-center cursor-pointer"
               onClick={() => handleProjectExpand(index)}
             >
-              <h4 className="font-bold text-sm sm:text-base text-gray-100">
+              <h4 className="font-bold text-base md:text-lg text-gray-100 group-hover:text-white transition-colors">
                 {project.name[language]}
               </h4>
-              <div className="flex items-center">
+              <div className="flex items-center gap-3">
                 {project.live_url && (
                   <Link
                     href={project.live_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:text-blue-600 mr-2"
+                    className="text-blue-400 hover:text-blue-300 transition-colors icon-base"
                     onClick={(e) => {
                       e.stopPropagation();
                       trackLinkClick("live", project.name[language]);
                     }}
                   >
-                    <ExternalLink size={16} />
+                    <ExternalLink className="w-5 h-5" />
                   </Link>
                 )}
                 <Link
                   href={project.github_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-gray-100 mr-2"
+                  className="text-gray-400 hover:text-gray-200 transition-colors icon-base"
                   onClick={(e) => {
                     e.stopPropagation();
                     trackLinkClick("github", project.name[language]);
                   }}
                 >
-                  <Github size={16} />
+                  <Github className="w-5 h-5" />
                 </Link>
-                {expandedProject === index ? (
-                  <ChevronUp className="text-gray-500" size={16} />
-                ) : (
-                  <ChevronDown className="text-gray-500" size={16} />
-                )}
+                <motion.div
+                  animate={{ rotate: expandedProject === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="text-gray-500 w-5 h-5" />
+                </motion.div>
               </div>
             </div>
             {expandedProject === index && (
@@ -346,13 +352,13 @@ export default function Projects() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="mt-3"
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="mt-4 md:mt-5 pt-4 md:pt-5 border-t border-gray-800"
               >
-                <p className="text-sm sm:text-base text-gray-300 mb-2">
+                <p className="text-sm md:text-base text-gray-300 mb-4 leading-relaxed">
                   {project.description[language]}
                 </p>
-                <div className="mb-2">
+                <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, i) => (
                     <TechBadge key={i} tech={tech} />
                   ))}
@@ -366,21 +372,22 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="mt-6 text-center"
+          transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 md:mt-12 text-center"
         >
           <button
             onClick={handleShowMoreToggle}
-            className="inline-flex items-center text-blue-400 hover:text-blue-300"
+            className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-blue-500/10"
           >
             {showAllProjects
               ? content[language].showLess
               : content[language].showMore}
-            <ChevronDown
-              className={`ml-1 w-4 h-4 transition-transform ${
-                showAllProjects ? "rotate-180" : ""
-              }`}
-            />
+            <motion.div
+              animate={{ rotate: showAllProjects ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChevronDown className="w-4 h-4" />
+            </motion.div>
           </button>
         </motion.div>
       )}

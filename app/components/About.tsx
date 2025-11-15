@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Skeleton } from "./ui/skeleton";
-import { Briefcase, Users, ChevronDown, ChevronUp } from "lucide-react";
+import { Users, ChevronDown } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { cn } from "../lib/utils";
@@ -89,11 +89,12 @@ export default function About({ isLoading }: AboutProps) {
         tr: "Full Stack Geliştirici",
       },
       description: {
-        en: "Pulse FinTech is a financial technology company where I develop mobile and web applications. I work with React Native for mobile development, JavaScript for frontend solutions, and Express.js for backend services, creating comprehensive fintech solutions.",
-        tr: "Pulse FinTech, mobil ve web uygulamaları geliştirdiğim bir finansal teknoloji şirketidir. Mobil geliştirme için React Native, frontend çözümleri için JavaScript ve backend servisleri için Express.js kullanarak kapsamlı fintech çözümleri oluşturuyorum.",
+        en: "Pulse FinTech is a financial technology company where I develop mobile and web applications. I work with React Native for mobile development, JavaScript for frontend solutions, and Express.js for backend services, creating comprehensive fintech solutions. Developed the new version of the application with Next.js.",
+        tr: "Pulse FinTech, mobil ve web uygulamaları geliştirdiğim bir finansal teknoloji şirketidir. Mobil geliştirme için React Native, frontend çözümleri için JavaScript ve backend servisleri için Express.js kullanarak kapsamlı fintech çözümleri oluşturuyorum. Next.js ile uygulamanın yeni versiyonunu geliştirdik.",
       },
       technologies: [
         "React Native",
+        "Next.js",
         "JavaScript",
         "Express.js",
         "REST API",
@@ -165,7 +166,7 @@ export default function About({ isLoading }: AboutProps) {
   ];
 
   const TechBadge = ({ tech }: { tech: string }) => (
-    <span className="inline-block bg-gradient-to-r from-blue-900 to-purple-900 text-gray-200 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded">
+    <span className="inline-block bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 text-gray-300 text-xs font-medium mr-2 mb-2 px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-colors">
       {tech}
     </span>
   );
@@ -174,9 +175,9 @@ export default function About({ isLoading }: AboutProps) {
     <motion.section
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       id="about"
-      className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"
+      className="max-w-4xl mx-auto container-padding section-padding"
     >
       {isLoading ? (
         <div className="space-y-6 sm:space-y-8">
@@ -212,37 +213,37 @@ export default function About({ isLoading }: AboutProps) {
       ) : (
         <>
           <motion.h2
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 gradient-text text-center"
           >
             {content[language].title}
           </motion.h2>
 
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-10 md:space-y-12">
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="border-b pb-4 sm:pb-6 border-gray-700"
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="border-b pb-8 md:pb-10 border-gray-800"
             >
-              <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+              <p className="text-base md:text-lg text-gray-300 leading-relaxed">
                 {content[language].description}
               </p>
             </motion.div>
 
             <div>
               <motion.h3
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center text-gray-100"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="text-xl md:text-2xl font-semibold mb-8 md:mb-10 flex items-center text-gray-100"
               >
-                <Users className="mr-2 sm:mr-3 text-purple-500" size={20} />
+                <Users className="mr-3 text-purple-400 icon-lg" />
                 {content[language].experience}
               </motion.h3>
-              <div className="space-y-3 sm:space-y-4">
+              <div className="space-y-4 md:space-y-5">
                 {experiences.map((exp, index) => (
                   <motion.div
                     key={index}
@@ -251,28 +252,28 @@ export default function About({ isLoading }: AboutProps) {
                     transition={{
                       duration: 0.5,
                       delay: 0.5 + index * 0.1,
-                      ease: "easeOut",
+                      ease: [0.16, 1, 0.3, 1],
                     }}
                     whileHover={{
-                      scale: 1.02,
+                      scale: 1.01,
                       transition: { duration: 0.2 },
                     }}
                     className={cn(
-                      "border rounded-lg p-3 sm:p-4 border-gray-700 transition-all duration-300 cursor-pointer",
+                      "card-modern p-5 md:p-6 cursor-pointer",
                       expandedExperience === index
-                        ? "shadow-lg border-purple-500/30 bg-gray-900/30"
-                        : "hover:shadow-md hover:border-gray-600"
+                        ? "border-purple-500/50 shadow-lg shadow-purple-500/10 bg-gray-900/50"
+                        : ""
                     )}
                   >
                     <div
                       className="flex justify-between items-center"
                       onClick={() => handleExperienceExpand(index)}
                     >
-                      <h4 className="font-bold text-base sm:text-lg text-gray-100">
+                      <h4 className="font-bold text-lg md:text-xl text-gray-100">
                         {exp.company}
                       </h4>
-                      <div className="flex items-center">
-                        <span className="text-xs sm:text-sm text-gray-300 font-medium mr-2">
+                      <div className="flex items-center gap-3">
+                        <span className="text-sm md:text-base text-gray-400 font-medium">
                           {exp.year}
                         </span>
                         <motion.div
@@ -281,7 +282,7 @@ export default function About({ isLoading }: AboutProps) {
                           }}
                           transition={{ duration: 0.3 }}
                         >
-                          <ChevronDown className="text-gray-500" size={16} />
+                          <ChevronDown className="text-gray-500 icon-base" />
                         </motion.div>
                       </div>
                     </div>
@@ -292,45 +293,34 @@ export default function About({ isLoading }: AboutProps) {
                         exit={{ opacity: 0, height: 0 }}
                         transition={{
                           duration: 0.4,
-                          ease: "easeInOut",
+                          ease: [0.16, 1, 0.3, 1],
                         }}
-                        className="mt-3 sm:mt-4 overflow-hidden"
+                        className="mt-5 md:mt-6 pt-5 md:pt-6 border-t border-gray-800 overflow-hidden"
                       >
                         <motion.p
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.1 }}
-                          className="text-sm sm:text-base font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-2"
+                          transition={{ delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                          className="text-base md:text-lg font-semibold gradient-text mb-3"
                         >
                           {exp.role[language]}
                         </motion.p>
                         <motion.p
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.2 }}
-                          className="text-sm sm:text-base text-gray-300 mb-2 sm:mb-3"
+                          transition={{ delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                          className="text-sm md:text-base text-gray-300 mb-4 leading-relaxed"
                         >
                           {exp.description[language]}
                         </motion.p>
                         <motion.div
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
-                          transition={{ delay: 0.3 }}
-                          className="mb-2 sm:mb-3"
+                          transition={{ delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          className="flex flex-wrap gap-2"
                         >
                           {exp.technologies.map((tech, i) => (
-                            <motion.span
-                              key={i}
-                              initial={{ opacity: 0, scale: 0.8 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{
-                                delay: 0.3 + i * 0.05,
-                                duration: 0.3,
-                              }}
-                              className="inline-block bg-gradient-to-r from-blue-900 to-purple-900 text-gray-200 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded hover:from-blue-800 hover:to-purple-800 transition-all duration-200"
-                            >
-                              {tech}
-                            </motion.span>
+                            <TechBadge key={i} tech={tech} />
                           ))}
                         </motion.div>
                       </motion.div>

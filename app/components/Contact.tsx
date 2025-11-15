@@ -1,11 +1,6 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
-import { Button } from "./ui/button";
-import { Loader2, Send, Mail, Phone, Linkedin, Github } from "lucide-react";
+import { Mail, Linkedin } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
-import { useTheme } from "next-themes";
 
 interface ContactProps {
   isLoading: boolean;
@@ -35,34 +30,63 @@ export default function Contact() {
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, delay: 0.6 }}
+      transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
       id="contact"
-      className="py-20 max-w-2xl mx-auto px-4 text-center"
+      className="section-padding max-w-3xl mx-auto container-padding text-center"
     >
-      <h2 className="text-4xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 md:mb-12 gradient-text"
+      >
         {content[language].title}
-      </h2>
-      <p className="mb-8 text-lg leading-relaxed">
+      </motion.h2>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className="mb-12 md:mb-16 text-lg md:text-xl leading-relaxed text-gray-300"
+      >
         {content[language].message}
-      </p>
-      <div className="flex justify-center space-x-6">
-        <a
+      </motion.p>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6"
+      >
+        <motion.a
           href="https://www.linkedin.com/in/eren-nasiroglu/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.98 }}
+          className="flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 
+            bg-gradient-to-r from-blue-600 to-blue-700 
+            hover:from-blue-500 hover:to-blue-600
+            text-white rounded-xl font-semibold
+            shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40
+            transition-all duration-300"
         >
-          <Linkedin className="mr-2" />
+          <Linkedin className="w-5 h-5 icon-base" />
           {content[language].linkedin}
-        </a>
-        <a
+        </motion.a>
+        <motion.a
           href="mailto:erenasiroglu1@gmail.com"
-          className="flex items-center text-purple-600 hover:text-purple-800 transition-colors"
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.98 }}
+          className="flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 
+            bg-gradient-to-r from-purple-600 to-cyan-600 
+            hover:from-purple-500 hover:to-cyan-500
+            text-white rounded-xl font-semibold
+            shadow-lg shadow-purple-500/25 hover:shadow-xl hover:shadow-purple-500/40
+            transition-all duration-300"
         >
-          <Mail className="mr-2" />
+          <Mail className="w-5 h-5 icon-base" />
           {content[language].email}
-        </a>
-      </div>
+        </motion.a>
+      </motion.div>
     </motion.section>
   );
 }

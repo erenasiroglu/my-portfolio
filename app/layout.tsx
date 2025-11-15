@@ -19,27 +19,30 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Eren Nasıroğlu | Portfolio",
+  title: "Eren Nasıroğlu | FullStack Developer & React Native Mobile Developer",
   description:
-    "Frontend Developer specializing in React, Next.js, TypeScript, and modern web technologies. Freelance web developer based in Turkey offering professional web development services.",
+    "FullStack Developer and React Native Mobile Developer specializing in React, Next.js, TypeScript, Node.js, and modern web/mobile technologies. Freelance developer based in Turkey offering professional development services.",
   keywords: [
     "Eren Nasıroğlu",
     "Eren Nasiroglu",
-    "Frontend Developer",
+    "FullStack Developer",
+    "React Native Developer",
+    "Mobile Developer",
     "Freelance Developer",
     "React Developer",
     "Next.js Developer",
     "UI/UX Designer",
     "Web Developer Turkey",
     "TypeScript Developer",
-    "Frontend Freelancer",
+    "Node.js Developer",
+    "FullStack Freelancer",
     "Nasıroğlu",
     "Nasıroglu",
   ],
   openGraph: {
-    title: "Eren Nasıroglu | Frontend Developer & UI/UX Designer",
+    title: "Eren Nasıroglu | FullStack Developer & React Native Mobile Developer",
     description:
-      "Professional Frontend Developer specializing in React, Next.js, and modern web development. Available for freelance projects.",
+      "Professional FullStack Developer and React Native Mobile Developer specializing in React, Next.js, Node.js, and modern web/mobile development. Available for freelance projects.",
     url: "https://erenasiroglu.tech",
     type: "website",
     locale: "en_US",
