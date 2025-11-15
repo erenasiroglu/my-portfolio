@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Award } from "lucide-react";
 import Link from "next/link";
 
 interface Certificate {
@@ -73,50 +73,88 @@ export default function Certificates() {
     },
   ];
 
+  const content = {
+    en: {
+      title: "Certificates",
+      back: "Back to Home",
+    },
+    tr: {
+      title: "Sertifikalar",
+      back: "Ana Sayfaya Dön",
+    },
+  };
+
+  const TechBadge = ({ skill }: { skill: string }) => (
+    <span className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
+      {skill}
+    </span>
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#0a0a0a] pt-24 pb-12 px-4"
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="min-h-screen bg-[#0a0a0a] pt-32 pb-16 container-padding"
     >
-      <div className="max-w-3xl mx-auto">
-        <Link
-          href="/home"
-          className="inline-flex items-center text-gray-400 hover:text-gray-200 mb-8"
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-12"
         >
-          <ArrowLeft className="w-5 h-5 mr-2" />
-          Back to Home
-        </Link>
+          <Link
+            href="/home"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-colors mb-8 group"
+          >
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            <span className="font-medium">{content[language].back}</span>
+          </Link>
 
-        <h1 className="text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
-          {language === "en" ? "Certificates" : "Sertifikalar"}
-        </h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 gradient-text flex items-center gap-3"
+          >
+            <Award className="w-8 h-8 md:w-10 md:h-10 text-blue-400" />
+            {content[language].title}
+          </motion.h1>
+        </motion.div>
 
-        <div className="grid gap-6">
+        <div className="grid gap-4 md:gap-6">
           {certificates.map((cert, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="border border-gray-700 rounded-lg p-6 hover:border-gray-600 transition-colors"
+              transition={{
+                duration: 0.5,
+                delay: 0.2 + index * 0.1,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              whileHover={{
+                scale: 1.01,
+                transition: { duration: 0.2 },
+              }}
+              className="card-modern p-5 md:p-6 group"
             >
-              <h3 className="text-xl font-semibold text-gray-200 mb-2">
-                {cert.title}
-              </h3>
-              <p className="text-gray-400 mb-2">
-                {cert.issuer} • {cert.date}
+              <div className="flex items-start justify-between mb-3">
+                <h3 className="text-lg md:text-xl font-bold text-gray-100 group-hover:text-white transition-colors">
+                  {cert.title}
+                </h3>
+                <span className="text-sm text-gray-500 font-medium whitespace-nowrap ml-4">
+                  {cert.date}
+                </span>
+              </div>
+              <p className="text-sm md:text-base text-gray-400 mb-4">
+                {cert.issuer}
               </p>
               {cert.skills && (
-                <div className="flex flex-wrap gap-2 mt-3">
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-800">
                   {cert.skills.map((skill, i) => (
-                    <span
-                      key={i}
-                      className="text-xs bg-gradient-to-r from-blue-900 to-purple-900 text-gray-200 px-2.5 py-0.5 rounded"
-                    >
-                      {skill}
-                    </span>
+                    <TechBadge key={i} skill={skill} />
                   ))}
                 </div>
               )}
