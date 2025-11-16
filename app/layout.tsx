@@ -19,35 +19,30 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Eren Nasıroğlu | FullStack Developer & React Native Mobile Developer",
+  title: "Eren Nasıroğlu | Full-Stack Developer & React Native Mobile Developer",
   description:
-    "FullStack Developer and React Native Mobile Developer specializing in React, Next.js, TypeScript, Node.js, and modern web/mobile technologies. Freelance developer based in Turkey offering professional development services.",
+    "Full-Stack Developer and React Native Mobile Developer specializing in React, Next.js, TypeScript, Node.js, and modern web/mobile technologies. Freelance developer based in Turkey offering professional development services.",
   keywords: [
     "Eren Nasıroğlu",
     "Eren Nasiroglu",
-    "FullStack Developer",
+    "Full-Stack Developer",
     "React Native Developer",
     "Mobile Developer",
     "Freelance Developer",
     "React Developer",
     "Next.js Developer",
-    "IOS Developer",
-    "Android Developer",
-    "JavaScript Developer",
-    "Frontend Developer",
-    "Backend Developer",
     "UI/UX Designer",
     "Web Developer Turkey",
     "TypeScript Developer",
     "Node.js Developer",
-    "FullStack Freelancer",
+    "Full-Stack Freelancer",
     "Nasıroğlu",
     "Nasıroglu",
   ],
   openGraph: {
     title: "Eren Nasıroglu | Full-Stack Developer & React Native Mobile Developer",
     description:
-      "Professional FullStack Developer and React Native Mobile Developer specializing in React, Next.js, Node.js, and modern web/mobile development. Available for freelance projects.",
+      "Professional Full-Stack Developer and React Native Mobile Developer specializing in React, Next.js, Node.js, and modern web/mobile development. Available for freelance projects.",
     url: "https://erenasiroglu.de",
     type: "website",
     locale: "en_US",
@@ -55,7 +50,7 @@ export const metadata: Metadata = {
   icons: [
     {
       rel: "icon",
-      url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'></text></svg>",
+      url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'>🚀</text></svg>",
     },
   ],
 };

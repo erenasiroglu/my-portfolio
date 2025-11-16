@@ -66,7 +66,7 @@ const PROJECTS: Project[] = [
       "Express.js",
       "React",
       "Tailwind",
-      "Fullstack Development",
+      "Full-Stack Development",
     ],
     github_url: "https://github.com/erenasiroglu/allthestars",
     live_url: "https://all-the-stars.vercel.app/",
