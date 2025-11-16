@@ -5,7 +5,6 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
-  /* Modern color tokens */
   --primary-blue: #3b82f6;
   --primary-purple: #9333ea;
   --primary-teal: #06b6d4;
@@ -32,17 +31,14 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Prevent FOUC */
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
 
-/* Show body when JavaScript loads */
 body.loaded {
   opacity: 1;
 }
 
-/* Initial loading state */
 .loading-prevent-fouc {
   visibility: hidden;
 }
@@ -51,7 +47,6 @@ body.loaded {
   visibility: visible;
 }
 
-/* Modern typography scale */
 @layer base {
   h1 {
     @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
@@ -80,7 +75,7 @@ body.loaded {
     letter-spacing: 0.01em;
   }
   
-  /* Improved spacing utilities */
+
   .section-padding {
     @apply py-16 md:py-20 lg:py-24;
   }

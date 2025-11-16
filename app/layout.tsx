@@ -31,6 +31,11 @@ export const metadata: Metadata = {
     "Freelance Developer",
     "React Developer",
     "Next.js Developer",
+    "IOS Developer",
+    "Android Developer",
+    "JavaScript Developer",
+    "Frontend Developer",
+    "Backend Developer",
     "UI/UX Designer",
     "Web Developer Turkey",
     "TypeScript Developer",
@@ -40,17 +45,17 @@ export const metadata: Metadata = {
     "Nasıroglu",
   ],
   openGraph: {
-    title: "Eren Nasıroglu | FullStack Developer & React Native Mobile Developer",
+    title: "Eren Nasıroglu | Full-Stack Developer & React Native Mobile Developer",
     description:
       "Professional FullStack Developer and React Native Mobile Developer specializing in React, Next.js, Node.js, and modern web/mobile development. Available for freelance projects.",
-    url: "https://erenasiroglu.tech",
+    url: "https://erenasiroglu.de",
     type: "website",
     locale: "en_US",
   },
   icons: [
     {
       rel: "icon",
-      url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'>🚀</text></svg>",
+      url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'></text></svg>",
     },
   ],
 };
@@ -63,11 +68,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        {/* FOUC Prevention Script */}
+
         <Script id="fouc-prevention" strategy="beforeInteractive">
           {`
             (function() {
-              // Add loaded class to body when DOM is ready
               if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', function() {
                   document.body.classList.add('loaded');
@@ -98,8 +102,7 @@ export default function RootLayout({
               'page_path': window.location.pathname,
               'cookie_flags': 'max-age=7200;secure;samesite=none'
             });
-            
-            // Track time spent on page
+   
             let startTime = new Date().getTime();
             window.addEventListener('beforeunload', function() {
               let endTime = new Date().getTime();
@@ -119,7 +122,7 @@ export default function RootLayout({
           })(window,document,'script','dataLayer','GTM-TDN595NX');`}
         </Script>
 
-        {/* Hotjar Tracking Code */}
+   
         <Script id="hotjar-tracking" strategy="afterInteractive">
           {`
             (function (c, s, q, u, a, r, e) {

@@ -1,5 +1,4 @@
-User-Agent: *
-Allow: /
-Disallow: /private/
+User-agent: *
+Disallow:
 
-Sitemap: https://www.erenasiroglu.tech/sitemap.xml
+Sitemap: https://erenasiroglu.de/sitemap.xml
