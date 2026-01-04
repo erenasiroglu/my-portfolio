@@ -1,9 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
-import { Award, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Award, Check } from "lucide-react";
+import { useState } from "react";
+import { cn } from "../lib/utils";
 
 interface Certificate {
   title: string;
@@ -63,28 +64,22 @@ const CERTIFICATES: Certificate[] = [
 
 export default function Certificates() {
   const { language } = useLanguage();
+  const [selectedCertificate, setSelectedCertificate] = useState<number>(0);
 
   const content = {
     en: {
       title: "Certificates",
-      subtitle: "Explore my professional certifications and achievements",
-      viewAll: "View All Certificates",
     },
     tr: {
       title: "Sertifikalar",
-      subtitle: "Profesyonel sertifikalarımı ve başarılarımı keşfedin",
-      viewAll: "Tüm Sertifikaları Gör",
     },
   };
 
-  const TechBadge = ({ skill }: { skill: string }) => (
-    <span className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
-      {skill}
-    </span>
-  );
+  const selectedCert = CERTIFICATES[selectedCertificate];
 
-  // Show first 4 certificates on home page
-  const displayedCertificates = CERTIFICATES.slice(0, 4);
+  const handleCertificateSelect = (index: number) => {
+    setSelectedCertificate(index);
+  };
 
   return (
     <motion.section
@@ -92,99 +87,84 @@ export default function Certificates() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       id="certificates"
-      className="max-w-4xl mx-auto container-padding section-padding"
+      className="max-w-7xl mx-auto container-padding section-padding"
     >
-      <motion.div
+      <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="mb-12 md:mb-16"
+        className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-gray-100"
       >
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 gradient-text text-center flex items-center justify-center gap-3"
-        >
-          <Award className="w-8 h-8 md:w-10 md:h-10 text-blue-400" />
-          {content[language].title}
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-base md:text-lg text-gray-400 text-center mb-8"
-        >
-          {content[language].subtitle}
-        </motion.p>
-      </motion.div>
+        {content[language].title}
+      </motion.h2>
 
-      <div className="grid gap-4 md:gap-6 mb-8">
-        {displayedCertificates.map((cert, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.5,
-              delay: 0.3 + index * 0.1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            whileHover={{
-              scale: 1.01,
-              transition: { duration: 0.2 },
-            }}
-            className="card-modern p-5 md:p-6 group"
-          >
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex-1">
-                <h3 className="text-lg md:text-xl font-bold text-gray-100 group-hover:text-white transition-colors mb-2">
-                  {cert.title}
-                </h3>
-                <p className="text-sm md:text-base text-gray-400">
-                  {cert.issuer}
+      <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+        {/* Left Side - Certificate List */}
+        <div className="flex md:flex-col gap-2 md:gap-0 border-b md:border-b-0 md:border-r border-gray-800 pb-4 md:pb-0 md:pr-8 md:min-w-[250px] overflow-x-auto md:overflow-x-visible">
+          {CERTIFICATES.map((cert, index) => (
+            <motion.button
+              key={index}
+              onClick={() => handleCertificateSelect(index)}
+              className={cn(
+                "flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all whitespace-nowrap md:whitespace-normal",
+                selectedCertificate === index
+                  ? "bg-gray-800/50 text-white"
+                  : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/30"
+              )}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Award className="w-5 h-5 flex-shrink-0 opacity-80" />
+              <span className="font-medium text-sm md:text-base">
+                {cert.title}
+              </span>
+            </motion.button>
+          ))}
+        </div>
+
+        {/* Right Side - Certificate Details */}
+        <div className="flex-1">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedCertificate}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="mb-6">
+                <h4 className="text-2xl md:text-3xl font-bold text-gray-100 mb-2">
+                  <span className="gradient-text">{selectedCert.title}</span>
+                </h4>
+                <p className="text-gray-400 text-sm md:text-base mb-2">
+                  {selectedCert.issuer}
+                </p>
+                <p className="text-gray-500 text-sm">
+                  {selectedCert.date}
                 </p>
               </div>
-              <span className="text-sm text-gray-500 font-medium whitespace-nowrap ml-4">
-                {cert.date}
-              </span>
-            </div>
-            {cert.skills && (
-              <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-800">
-                {cert.skills.map((skill, i) => (
-                  <TechBadge key={i} skill={skill} />
-                ))}
-              </div>
-            )}
-          </motion.div>
-        ))}
-      </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="text-center"
-      >
-        <Link href="/certificates">
-          <motion.div
-            whileHover={{ scale: 1.05, x: 5 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 
-              bg-gradient-to-r from-blue-800 via-blue-700 to-cyan-700
-              hover:from-blue-700 hover:via-blue-600 hover:to-cyan-600
-              text-white rounded-xl font-semibold
-              shadow-lg shadow-blue-900/40
-              hover:shadow-xl hover:shadow-blue-900/50
-              transition-all duration-300 ease-out
-              border border-gray-700/50"
-          >
-            <span>{content[language].viewAll}</span>
-            <ArrowRight className="w-5 h-5" />
-          </motion.div>
-        </Link>
-      </motion.div>
+              {selectedCert.skills && selectedCert.skills.length > 0 && (
+                <div className="mt-6">
+                  <h5 className="text-lg font-semibold text-gray-200 mb-4">
+                    Skills & Technologies
+                  </h5>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedCert.skills.map((skill, i) => (
+                      <span
+                        key={i}
+                        className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
     </motion.section>
   );
 }
-

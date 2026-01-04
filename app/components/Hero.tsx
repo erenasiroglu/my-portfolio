@@ -7,6 +7,9 @@ import { Skeleton } from "./ui/skeleton";
 import { useTheme } from "next-themes";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useEffect } from "react";
+import { TypewriterEffect } from "./ui/typewriter-effect";
+import { Spotlight } from "./ui/spotlight";
+import { cn } from "../lib/utils";
 
 interface HeroProps {
   isLoading: boolean;
@@ -36,21 +39,35 @@ export default function Hero({ isLoading }: HeroProps) {
   const content = {
     en: {
       role: "Full Stack Developer",
-      cta: "Discover my 2025 GitHub activity",
+      rolePart2: "Building Mobile Applications",
+      cta: "Discover my 2026 GitHub activity",
     },
     tr: {
       role: "Full Stack Geliştirici",
-      cta: "2025 GitHub aktivitemi keşfedin",
+      rolePart2: "Mobil Uygulama Geliştirme",
+      cta: "2026 GitHub aktivitemi keşfedin",
     },
   };
 
   return (
-    <div className="relative px-4 md:px-0">
+    <div className={cn("relative w-full overflow-hidden rounded-md bg-black/[0.96] antialiased md:items-center md:justify-center", "px-4 md:px-0")}>
+      <div
+        className={cn(
+          "pointer-events-none absolute inset-0 [background-size:40px_40px] select-none",
+          "[background-image:linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)]",
+        )}
+      />
+
+      <Spotlight
+        className="-top-40 left-0 md:-top-20 md:left-60"
+        fill="white"
+      />
+
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="pt-32 md:pt-48 pb-24 md:pb-32 text-center"
+        className="relative z-10 pt-32 md:pt-48 pb-12 md:pb-16 text-center"
       >
         {isLoading ? (
           <div className="flex flex-col items-center gap-6">
@@ -65,14 +82,27 @@ export default function Hero({ isLoading }: HeroProps) {
           </div>
         ) : (
           <>
-            <motion.h1
+            <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-300 via-blue-500 to-cyan-400 drop-shadow-[0_0_30px_rgba(59,130,246,0.6)]"
+              className="mb-6 md:mb-8"
             >
-              Eren Nasıroglu
-            </motion.h1>
+              <TypewriterEffect
+                words={[
+                  {
+                    text: "Eren",
+                    className: "text-5xl md:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-300 via-blue-500 to-cyan-400",
+                  },
+                  {
+                    text: "Nasıroglu",
+                    className: "text-5xl md:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-300",
+                  },
+                ]}
+                className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
+                cursorClassName="bg-blue-500"
+              />
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -80,7 +110,7 @@ export default function Hero({ isLoading }: HeroProps) {
               transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="text-xl md:text-2xl lg:text-3xl mb-12 md:mb-16 text-gray-300 font-medium tracking-wide"
             >
-              {content[language].role}
+              {content[language].role} | {content[language].rolePart2}
             </motion.p>
 
             <motion.div

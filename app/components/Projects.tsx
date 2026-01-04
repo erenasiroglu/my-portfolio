@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
-import { Github, ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
+import { Github, ExternalLink, Check } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { cn } from "../lib/utils";
@@ -20,6 +20,10 @@ interface Project {
   github_url: string;
   live_url?: string;
   isNew?: boolean;
+  highlights?: {
+    en: string[];
+    tr: string[];
+  };
 }
 
 const PROJECTS: Project[] = [
@@ -35,6 +39,18 @@ const PROJECTS: Project[] = [
     },
     technologies: ["Expo", "Firebase", "React Native", "Mobile Development"],
     github_url: "https://github.com/erenasiroglu/expense-tracker-app",
+    highlights: {
+      en: [
+        "Developed expense tracker mobile app using Expo and React Native",
+        "Integrated Firebase for real-time data synchronization",
+        "Implemented user authentication and expense management features",
+      ],
+      tr: [
+        "Expo ve React Native kullanarak gider takip mobil uygulaması geliştirdim",
+        "Gerçek zamanlı veri senkronizasyonu için Firebase entegrasyonu yaptım",
+        "Kullanıcı kimlik doğrulama ve gider yönetimi özellikleri uyguladım",
+      ],
+    },
   },
   {
     name: {
@@ -50,6 +66,18 @@ const PROJECTS: Project[] = [
     github_url: "https://github.com/erenasiroglu/chatbot-ollama",
     live_url:
       "https://react-ollama-frontend-erenasiroglus-projects.vercel.app/",
+    highlights: {
+      en: [
+        "Built AI chatbot application with React and Vite",
+        "Integrated Ollama API for AI responses",
+        "Developed backend using Hono framework on Node.js",
+      ],
+      tr: [
+        "React ve Vite ile AI chatbot uygulaması geliştirdim",
+        "AI yanıtları için Ollama API entegrasyonu yaptım",
+        "Node.js üzerinde Hono framework kullanarak backend geliştirdim",
+      ],
+    },
   },
   {
     name: {
@@ -70,6 +98,18 @@ const PROJECTS: Project[] = [
     ],
     github_url: "https://github.com/erenasiroglu/allthestars",
     live_url: "https://all-the-stars.vercel.app/",
+    highlights: {
+      en: [
+        "Developed full-stack e-commerce platform with Node.js and MongoDB",
+        "Built responsive frontend with React and Tailwind CSS",
+        "Implemented admin panel for product management",
+      ],
+      tr: [
+        "Node.js ve MongoDB ile full-stack e-ticaret platformu geliştirdim",
+        "React ve Tailwind CSS ile responsive frontend oluşturdum",
+        "Ürün yönetimi için admin paneli uyguladım",
+      ],
+    },
   },
   {
     name: {
@@ -83,8 +123,19 @@ const PROJECTS: Project[] = [
     technologies: ["React", "Javascript", "SCSS"],
     github_url: "https://github.com/erenasiroglu/quiz-app",
     live_url: "https://quiz-app-erenasiroglus-projects.vercel.app/",
+    highlights: {
+      en: [
+        "Built interactive quiz application with React",
+        "Implemented timer functionality and question navigation",
+        "Created results table with answer tracking",
+      ],
+      tr: [
+        "React ile interaktif quiz uygulaması geliştirdim",
+        "Zamanlayıcı fonksiyonu ve soru navigasyonu uyguladım",
+        "Cevap takibi ile sonuç tablosu oluşturdum",
+      ],
+    },
   },
-
   {
     name: {
       en: "Landing Page",
@@ -103,6 +154,18 @@ const PROJECTS: Project[] = [
     ],
     github_url: "https://github.com/erenasiroglu/landing-page",
     live_url: "https://landing-page-erenasiroglus-projects.vercel.app/",
+    highlights: {
+      en: [
+        "Created modern landing page with React and Tailwind CSS",
+        "Implemented responsive design for all devices",
+        "Built 9-section layout with smooth navigation",
+      ],
+      tr: [
+        "React ve Tailwind CSS ile modern landing page oluşturdum",
+        "Tüm cihazlar için responsive tasarım uyguladım",
+        "Yumuşak navigasyon ile 9 bölümlü düzen oluşturdum",
+      ],
+    },
   },
   {
     name: {
@@ -116,6 +179,18 @@ const PROJECTS: Project[] = [
     technologies: ["React", "Redux", "UI Design", "Storybook", "Math.js"],
     github_url: "https://github.com/erenasiroglu/case-study",
     live_url: "https://case-study-before-sunset.vercel.app/",
+    highlights: {
+      en: [
+        "Developed timer application with React and Redux",
+        "Implemented state management with Redux",
+        "Created UI components with Storybook",
+      ],
+      tr: [
+        "React ve Redux ile zamanlayıcı uygulaması geliştirdim",
+        "Redux ile state management uyguladım",
+        "Storybook ile UI bileşenleri oluşturdum",
+      ],
+    },
   },
   {
     name: {
@@ -124,10 +199,22 @@ const PROJECTS: Project[] = [
     },
     description: {
       en: "A table design project that I developed using React and Tailwind CSS. The project includes create a table with sorting and filtering features.",
-      tr: "React ve Tailwind CSS kullanarak geliştirdiğim bir tablo tasarım projesi. Proje, sıralama ve filtreleme özelliklerine sahip bir tabloyu oluşturmayu içerir.",
+      tr: "React ve Tailwind CSS kullanarak geliştirdiğim bir tablo tasarım projesi. Proje, sıralama ve filtreleme özelliklerine sahip bir tabloyu oluşturmayı içerir.",
     },
     technologies: ["Shadcn", "React", "Tailwind CSS", "UI Design", "MongoDB"],
     github_url: "https://github.com/erenasiroglu/case-study",
+    highlights: {
+      en: [
+        "Built table component with sorting and filtering",
+        "Implemented data visualization with React",
+        "Created responsive table design with Tailwind CSS",
+      ],
+      tr: [
+        "Sıralama ve filtreleme ile tablo bileşeni oluşturdum",
+        "React ile veri görselleştirme uyguladım",
+        "Tailwind CSS ile responsive tablo tasarımı oluşturdum",
+      ],
+    },
   },
   {
     name: {
@@ -140,18 +227,28 @@ const PROJECTS: Project[] = [
     },
     technologies: ["React Native", "Expo", "UI Design", "Mobile Development"],
     github_url: "https://github.com/erenasiroglu/case-study",
+    highlights: {
+      en: [
+        "Developed mobile app clone using React Native and Expo",
+        "Implemented UI design matching the original app",
+        "Built mobile-optimized user interface",
+      ],
+      tr: [
+        "React Native ve Expo kullanarak mobil uygulama klonu geliştirdim",
+        "Orijinal uygulamaya uygun UI tasarımı uyguladım",
+        "Mobil optimize edilmiş kullanıcı arayüzü oluşturdum",
+      ],
+    },
   },
 ];
 
 export default function Projects() {
   const { language } = useLanguage();
-  const [expandedProject, setExpandedProject] = useState<number | null>(null);
-  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<number>(0);
 
   // Bileşen yüklendiğinde Analytics takibi
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Google Analytics için Projects görüntüleme takibi
       if (window.gtag) {
         window.gtag("event", "section_view", {
           event_category: "engagement",
@@ -159,33 +256,25 @@ export default function Projects() {
           non_interaction: true,
         });
       }
-
-      // Hotjar için Projects görüntüleme takibi
       if (window.hj) {
         window.hj("event", "projects_section_viewed");
       }
     }
   }, []);
 
-  // Proje genişletme olayını takip etme
-  const handleProjectExpand = (index: number) => {
-    const newExpandedState = expandedProject === index ? null : index;
-    setExpandedProject(newExpandedState);
-
-    if (newExpandedState !== null && typeof window !== "undefined") {
+  // Proje seçimi takibi
+  const handleProjectSelect = (index: number) => {
+    setSelectedProject(index);
+    if (typeof window !== "undefined") {
       const projectName = PROJECTS[index].name[language];
-
-      // Google Analytics için proje genişletme takibi
       if (window.gtag) {
-        window.gtag("event", "project_expand", {
+        window.gtag("event", "project_select", {
           event_category: "engagement",
           event_label: projectName,
         });
       }
-
-      // Hotjar için proje genişletme takibi
       if (window.hj) {
-        window.hj("event", `project_expanded_${index}`);
+        window.hj("event", `project_selected_${index}`);
       }
     }
   };
@@ -193,7 +282,6 @@ export default function Projects() {
   // Proje bağlantı tıklamalarını takip etme
   const trackLinkClick = (type: "github" | "live", projectName: string) => {
     if (typeof window !== "undefined") {
-      // Google Analytics için link tıklama takibi
       if (window.gtag) {
         window.gtag("event", "link_click", {
           event_category: "outbound",
@@ -201,32 +289,8 @@ export default function Projects() {
           transport_type: "beacon",
         });
       }
-
-      // Hotjar için link tıklama takibi
       if (window.hj) {
         window.hj("event", `${type}_link_clicked_${projectName}`);
-      }
-    }
-  };
-
-  // "Daha fazla göster" butonunu takip etme
-  const handleShowMoreToggle = () => {
-    setShowAllProjects(!showAllProjects);
-
-    if (typeof window !== "undefined") {
-      const action = !showAllProjects ? "show_more" : "show_less";
-
-      // Google Analytics için "daha fazla göster" takibi
-      if (window.gtag) {
-        window.gtag("event", action, {
-          event_category: "engagement",
-          event_label: "projects",
-        });
-      }
-
-      // Hotjar için "daha fazla göster" takibi
-      if (window.hj) {
-        window.hj("event", `projects_${action}`);
       }
     }
   };
@@ -234,23 +298,13 @@ export default function Projects() {
   const content = {
     en: {
       title: "Projects",
-      showMore: "Click to see more projects",
-      showLess: "Show less projects",
     },
     tr: {
       title: "Projeler",
-      showMore: "Daha fazla proje görmek için tıklayın",
-      showLess: "Daha az proje göster",
     },
   };
 
-  const TechBadge = ({ tech }: { tech: string }) => (
-    <span className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium mr-2 mb-2 px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
-      {tech}
-    </span>
-  );
-
-  const visibleProjects = showAllProjects ? PROJECTS : PROJECTS.slice(0, 3);
+  const selectedProj = PROJECTS[selectedProject];
 
   return (
     <motion.section
@@ -258,139 +312,124 @@ export default function Projects() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       id="projects"
-      className="max-w-4xl mx-auto container-padding section-padding"
+      className="max-w-7xl mx-auto container-padding section-padding"
     >
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 gradient-text text-center"
+        className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-gray-100"
       >
         {content[language].title}
       </motion.h2>
-      <div className="space-y-4 md:space-y-6">
-        {visibleProjects.map((project, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className={cn(
-              "card-modern p-5 md:p-6 relative group",
-              expandedProject === index
-                ? "border-blue-500/50 shadow-lg shadow-blue-500/10"
-                : "",
-              project.isNew && "border-blue-500/30"
-            )}
-            style={{
-              background: project.isNew
-                ? "linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(6, 182, 212, 0.08))"
-                : undefined,
-            }}
-          >
-            {project.isNew && (
-              <motion.div
-                initial={{ scale: 0, rotate: -15 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 10,
-                  duration: 0.5,
-                }}
-                className="absolute -top-2.5 -left-2.5 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full
-                border border-blue-500/30
-                backdrop-blur-sm shadow-lg"
-              >
-                New
-              </motion.div>
-            )}
-            <div
-              className="flex justify-between items-center cursor-pointer"
-              onClick={() => handleProjectExpand(index)}
+
+      <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+        {/* Left Side - Project List */}
+        <div className="flex md:flex-col gap-2 md:gap-0 border-b md:border-b-0 md:border-r border-gray-800 pb-4 md:pb-0 md:pr-8 md:min-w-[250px] overflow-x-auto md:overflow-x-visible">
+          {PROJECTS.map((project, index) => (
+            <motion.button
+              key={index}
+              onClick={() => handleProjectSelect(index)}
+              className={cn(
+                "flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all whitespace-nowrap md:whitespace-normal",
+                selectedProject === index
+                  ? "bg-gray-800/50 text-white"
+                  : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/30"
+              )}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <h4 className="font-bold text-base md:text-lg text-gray-100 group-hover:text-white transition-colors">
+              <Github className="w-5 h-5 flex-shrink-0 opacity-80" />
+              <span className="font-medium text-sm md:text-base">
                 {project.name[language]}
-              </h4>
-              <div className="flex items-center gap-3">
-                {project.live_url && (
-                  <Link
-                    href={project.live_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-400 hover:text-blue-300 transition-colors icon-base"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      trackLinkClick("live", project.name[language]);
-                    }}
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                  </Link>
-                )}
-                <Link
-                  href={project.github_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gray-200 transition-colors icon-base"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    trackLinkClick("github", project.name[language]);
-                  }}
-                >
-                  <Github className="w-5 h-5" />
-                </Link>
-                <motion.div
-                  animate={{ rotate: expandedProject === index ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="text-gray-500 w-5 h-5" />
-                </motion.div>
-              </div>
-            </div>
-            {expandedProject === index && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-4 md:mt-5 pt-4 md:pt-5 border-t border-gray-800"
-              >
-                <p className="text-sm md:text-base text-gray-300 mb-4 leading-relaxed">
-                  {project.description[language]}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, i) => (
-                    <TechBadge key={i} tech={tech} />
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </motion.div>
-        ))}
-      </div>
-      {PROJECTS.length > 3 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 md:mt-12 text-center"
-        >
-          <button
-            onClick={handleShowMoreToggle}
-            className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-blue-500/10"
-          >
-            {showAllProjects
-              ? content[language].showLess
-              : content[language].showMore}
+              </span>
+              {project.isNew && (
+                <span className="ml-auto bg-blue-500/20 text-blue-400 text-xs font-semibold px-2 py-0.5 rounded-full border border-blue-500/30">
+                  New
+                </span>
+              )}
+            </motion.button>
+          ))}
+        </div>
+
+        {/* Right Side - Project Details */}
+        <div className="flex-1">
+          <AnimatePresence mode="wait">
             <motion.div
-              animate={{ rotate: showAllProjects ? 180 : 0 }}
+              key={selectedProject}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <ChevronDown className="w-4 h-4" />
+              <div className="mb-6 flex items-start justify-between gap-4">
+                <div>
+                  <h4 className="text-2xl md:text-3xl font-bold text-gray-100 mb-2">
+                    <span className="gradient-text">{selectedProj.name[language]}</span>
+                  </h4>
+                  {selectedProj.isNew && (
+                    <span className="inline-block bg-blue-500/20 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/30 mb-2">
+                      New
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  {selectedProj.live_url && (
+                    <Link
+                      href={selectedProj.live_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 transition-colors"
+                      onClick={() => trackLinkClick("live", selectedProj.name[language])}
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                    </Link>
+                  )}
+                  <Link
+                    href={selectedProj.github_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-gray-200 transition-colors"
+                    onClick={() => trackLinkClick("github", selectedProj.name[language])}
+                  >
+                    <Github className="w-5 h-5" />
+                  </Link>
+                </div>
+              </div>
+
+              {selectedProj.highlights && (
+                <div className="space-y-4 mb-6">
+                  {selectedProj.highlights[language].map((highlight, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-start gap-3"
+                    >
+                      <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <p className="text-gray-300 text-sm md:text-base">
+                        {highlight}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+
+              <div className="flex flex-wrap gap-2 mt-6">
+                {selectedProj.technologies.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </motion.div>
-          </button>
-        </motion.div>
-      )}
+          </AnimatePresence>
+        </div>
+      </div>
     </motion.section>
   );
 }

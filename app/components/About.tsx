@@ -1,11 +1,11 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Skeleton } from "./ui/skeleton";
-import { Users, ChevronDown } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { cn } from "../lib/utils";
 import { useLanguage } from "../contexts/LanguageContext";
+import { Check, Building2 } from "lucide-react";
 
 interface AboutProps {
   isLoading: boolean;
@@ -13,15 +13,12 @@ interface AboutProps {
 
 export default function About({ isLoading }: AboutProps) {
   const { theme } = useTheme();
-  const [expandedExperience, setExpandedExperience] = useState<number | null>(
-    null
-  );
+  const [selectedExperience, setSelectedExperience] = useState<number>(0);
   const { language } = useLanguage();
 
   // About bölümü görüntüleme takibi
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Google Analytics için About görüntüleme takibi
       if (window.gtag) {
         window.gtag("event", "section_view", {
           event_category: "engagement",
@@ -29,37 +26,27 @@ export default function About({ isLoading }: AboutProps) {
           non_interaction: true,
         });
       }
-
-      // Hotjar için About görüntüleme takibi
       if (window.hj) {
         window.hj("event", "about_section_viewed");
       }
     }
   }, []);
 
-  // Deneyim detaylarını genişletme olayını takip etme
-  const handleExperienceExpand = (index: number) => {
-    const newExpandedState = expandedExperience === index ? null : index;
-    setExpandedExperience(newExpandedState);
-
-    if (newExpandedState !== null && typeof window !== "undefined") {
+  // Şirket seçimi takibi
+  const handleCompanySelect = (index: number) => {
+    setSelectedExperience(index);
+    if (typeof window !== "undefined") {
       const companyName = experiences[index].company;
-
-      // Google Analytics için deneyim genişletme takibi
       if (window.gtag) {
-        window.gtag("event", "experience_expand", {
+        window.gtag("event", "experience_select", {
           event_category: "engagement",
           event_label: companyName,
         });
       }
-
-      // Hotjar için deneyim genişletme takibi
       if (window.hj) {
         window.hj(
           "event",
-          `experience_expanded_${companyName
-            .replace(/\s+/g, "_")
-            .toLowerCase()}`
+          `experience_selected_${companyName.replace(/\s+/g, "_").toLowerCase()}`
         );
       }
     }
@@ -70,19 +57,20 @@ export default function About({ isLoading }: AboutProps) {
       title: "About Me",
       description:
         "Hi, I am Eren. I graduated from the Management Information Systems department in 2024. My experience in web development started in November 2022, and since then, I have been actively working to improve myself in the software industry. Although I have professional experience with React, Next.js, and Vue, I continue to enhance my skills every day with creative projects I come up with, focusing on React Native and Node.js as well. I always prioritize creating products with user-friendly design and clean code principles.",
-      experience: "Professional Experience",
+      experience: "Work Experience",
     },
     tr: {
       title: "Hakkımda",
       description:
         "Merhaba, ben Eren. 2024 yılında Yönetim Bilişim Sistemleri bölümünden mezun oldum. Web geliştirme deneyimim Kasım 2022'de başladı ve o zamandan beri yazılım endüstrisinde kendimi geliştirmek için aktif olarak çalışıyorum. React, Next.js ve Vue konusunda profesyonel deneyimim olmasına rağmen, React Native ve Node.js üzerine odaklanarak her gün kendimi geliştirmeye devam ediyorum. Her zaman kullanıcı dostu tasarım ve temiz kod prensiplerine sahip ürünler oluşturmayı önceliklendiriyorum.",
-      experience: "Profesyonel Deneyim",
+      experience: "İş Deneyimi",
     },
   };
 
   const experiences = [
     {
       company: "Pulse FinTech",
+      logoDomain: "pulsefintech.com",
       year: "05/2025 - Present",
       role: {
         en: "Full Stack Developer",
@@ -101,9 +89,22 @@ export default function About({ isLoading }: AboutProps) {
         "Mobile Development",
         "FinTech",
       ],
+      highlights: {
+        en: [
+          "Developed mobile and web applications using React Native and Next.js",
+          "Built comprehensive fintech solutions with Express.js backend",
+          "Created user-friendly interfaces with modern web technologies",
+        ],
+        tr: [
+          "React Native ve Next.js kullanarak mobil ve web uygulamaları geliştirdim",
+          "Express.js backend ile kapsamlı fintech çözümleri oluşturdum",
+          "Modern web teknolojileriyle kullanıcı dostu arayüzler tasarladım",
+        ],
+      },
     },
     {
       company: "BeforeSunset AI",
+      logoDomain: "beforesunset.ai",
       year: "06/2024 - 05/2025",
       role: {
         en: "Software Developer",
@@ -122,22 +123,48 @@ export default function About({ isLoading }: AboutProps) {
         "Firebase",
         "AI Integration",
       ],
+      highlights: {
+        en: [
+          "Built AI-powered productivity tools with React and Next.js",
+          "Implemented state management using Zustand",
+          "Integrated Supabase for backend services",
+        ],
+        tr: [
+          "React ve Next.js ile AI destekli verimlilik araçları geliştirdim",
+          "Zustand kullanarak state management uyguladım",
+          "Backend servisleri için Supabase entegrasyonu yaptım",
+        ],
+      },
     },
     {
       company: "GEMAS Pool Technology",
+      logoDomain: "gemas.com",
       year: "03/2024 - 06/2024",
       role: {
         en: "Full Stack Developer",
         tr: "Full Stack Geliştirici",
       },
       description: {
-        en: "Gemas is a company that produces pool technologies. In this project, I was involved in creating an e-commerce site using PHP Laravel.",
-        tr: "Gemas, havuz teknolojileri üreten bir şirkettir. Bu projede, PHP Laravel kullanarak bir e-ticaret sitesi oluşturmada yer aldım.",
+        en: "GEMAS is a company that produces pool technologies. In this project, I was involved in creating an e-commerce site using PHP Laravel.",
+        tr: "GEMAS, havuz teknolojileri üreten bir şirkettir. Bu projede, PHP Laravel kullanarak bir e-ticaret sitesi oluşturmada yer aldım.",
       },
       technologies: ["PHP", "Laravel", "MySQL"],
+      highlights: {
+        en: [
+          "Developed e-commerce platform using PHP Laravel",
+          "Implemented MySQL database for product management",
+          "Created responsive user interfaces",
+        ],
+        tr: [
+          "PHP Laravel kullanarak e-ticaret platformu geliştirdim",
+          "Ürün yönetimi için MySQL veritabanı uyguladım",
+          "Responsive kullanıcı arayüzleri oluşturdum",
+        ],
+      },
     },
     {
       company: "Decktopus AI",
+      logoDomain: "decktopus.com",
       year: "10/2022 - 03/2024",
       role: {
         en: "Frontend Developer",
@@ -162,14 +189,22 @@ export default function About({ isLoading }: AboutProps) {
         "Data Analysis",
         "Feature Flag",
       ],
+      highlights: {
+        en: [
+          "Developed features for AI-powered presentation tool",
+          "Worked with Vue, Vuetify, and GraphQL for frontend development",
+          "Implemented UI components and user experience improvements",
+        ],
+        tr: [
+          "AI destekli sunum aracı için özellikler geliştirdim",
+          "Frontend geliştirme için Vue, Vuetify ve GraphQL kullandım",
+          "UI bileşenleri ve kullanıcı deneyimi iyileştirmeleri uyguladım",
+        ],
+      },
     },
   ];
 
-  const TechBadge = ({ tech }: { tech: string }) => (
-    <span className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium mr-2 mb-2 px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
-      {tech}
-    </span>
-  );
+  const selectedExp = experiences[selectedExperience];
 
   return (
     <motion.section
@@ -177,37 +212,16 @@ export default function About({ isLoading }: AboutProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       id="about"
-      className="max-w-4xl mx-auto container-padding section-padding"
+      className="max-w-7xl mx-auto container-padding section-padding"
     >
       {isLoading ? (
         <div className="space-y-6 sm:space-y-8">
-          {/* Title skeleton */}
           <Skeleton className="h-8 w-48 mb-6 sm:mb-8" />
-
-          {/* Description skeleton */}
           <div className="border-b pb-4 sm:pb-6 border-gray-700">
             <Skeleton className="h-4 w-full mb-3" />
             <Skeleton className="h-4 w-5/6 mb-3" />
             <Skeleton className="h-4 w-4/5 mb-3" />
             <Skeleton className="h-4 w-3/4" />
-          </div>
-
-          {/* Experience section skeleton */}
-          <div>
-            <Skeleton className="h-6 w-56 mb-4 sm:mb-6" />
-            <div className="space-y-3 sm:space-y-4">
-              {[...Array(3)].map((_, index) => (
-                <div
-                  key={index}
-                  className="border rounded-lg p-3 sm:p-4 border-gray-700"
-                >
-                  <div className="flex justify-between items-center">
-                    <Skeleton className="h-5 w-40" />
-                    <Skeleton className="h-4 w-24" />
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       ) : (
@@ -238,95 +252,87 @@ export default function About({ isLoading }: AboutProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="text-xl md:text-2xl font-semibold mb-8 md:mb-10 flex items-center text-gray-100"
+                className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-gray-100"
               >
-                <Users className="mr-3 text-blue-400 icon-lg" />
                 {content[language].experience}
               </motion.h3>
-              <div className="space-y-4 md:space-y-5">
-                {experiences.map((exp, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{
-                      duration: 0.5,
-                      delay: 0.5 + index * 0.1,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    whileHover={{
-                      scale: 1.01,
-                      transition: { duration: 0.2 },
-                    }}
-                    className={cn(
-                      "card-modern p-5 md:p-6 cursor-pointer",
-                      expandedExperience === index
-                        ? "border-blue-500/50 shadow-lg shadow-blue-500/10 bg-gray-900/50"
-                        : ""
-                    )}
-                  >
-                    <div
-                      className="flex justify-between items-center"
-                      onClick={() => handleExperienceExpand(index)}
+
+              <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+                {/* Left Side - Company List */}
+                <div className="flex md:flex-col gap-2 md:gap-0 border-b md:border-b-0 md:border-r border-gray-800 pb-4 md:pb-0 md:pr-8 md:min-w-[200px]">
+                  {experiences.map((exp, index) => (
+                    <motion.button
+                      key={index}
+                      onClick={() => handleCompanySelect(index)}
+                      className={cn(
+                        "flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all",
+                        selectedExperience === index
+                          ? "bg-gray-800/50 text-white"
+                          : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/30"
+                      )}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      <h4 className="font-bold text-lg md:text-xl text-gray-100">
+                      <Building2 className="w-5 h-5 flex-shrink-0 opacity-80" />
+                      <span className="font-medium text-sm md:text-base">
                         {exp.company}
-                      </h4>
-                      <div className="flex items-center gap-3">
-                        <span className="text-sm md:text-base text-gray-400 font-medium">
-                          {exp.year}
-                        </span>
-                        <motion.div
-                          animate={{
-                            rotate: expandedExperience === index ? 180 : 0,
-                          }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <ChevronDown className="text-gray-500 icon-base" />
-                        </motion.div>
+                      </span>
+                    </motion.button>
+                  ))}
+                </div>
+
+                {/* Right Side - Experience Details */}
+                <div className="flex-1">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={selectedExperience}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="mb-6">
+                        <h4 className="text-2xl md:text-3xl font-bold text-gray-100 mb-2">
+                          <span className="gradient-text">
+                            {selectedExp.role[language]}
+                          </span>{" "}
+                          <span className="text-blue-400">@ {selectedExp.company}</span>
+                        </h4>
+                        <p className="text-gray-400 text-sm md:text-base">
+                          {selectedExp.year}
+                        </p>
                       </div>
-                    </div>
-                    {expandedExperience === index && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{
-                          duration: 0.4,
-                          ease: [0.16, 1, 0.3, 1],
-                        }}
-                        className="mt-5 md:mt-6 pt-5 md:pt-6 border-t border-gray-800 overflow-hidden"
-                      >
-                        <motion.p
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                          className="text-base md:text-lg font-semibold gradient-text mb-3"
-                        >
-                          {exp.role[language]}
-                        </motion.p>
-                        <motion.p
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                          className="text-sm md:text-base text-gray-300 mb-4 leading-relaxed"
-                        >
-                          {exp.description[language]}
-                        </motion.p>
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                          className="flex flex-wrap gap-2"
-                        >
-                          {exp.technologies.map((tech, i) => (
-                            <TechBadge key={i} tech={tech} />
-                          ))}
-                        </motion.div>
-                      </motion.div>
-                    )}
-                  </motion.div>
-                ))}
+
+                      <div className="space-y-4 mb-6">
+                        {selectedExp.highlights[language].map((highlight, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0, x: 10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="flex items-start gap-3"
+                          >
+                            <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                            <p className="text-gray-300 text-sm md:text-base">
+                              {highlight}
+                            </p>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mt-6">
+                        {selectedExp.technologies.map((tech, i) => (
+                          <span
+                            key={i}
+                            className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
           </div>
