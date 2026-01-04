@@ -98,24 +98,24 @@ export default function Certificates() {
         {content[language].title}
       </motion.h2>
 
-      <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-12">
         {/* Left Side - Certificate List */}
-        <div className="flex md:flex-col gap-2 md:gap-0 border-b md:border-b-0 md:border-r border-gray-800 pb-4 md:pb-0 md:pr-8 md:min-w-[250px] overflow-x-auto md:overflow-x-visible">
+        <div className="flex md:flex-col gap-2 md:gap-0 border-b md:border-b-0 md:border-r border-gray-800 pb-4 md:pb-0 md:pr-8 md:min-w-[250px] overflow-x-auto md:overflow-x-visible -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide">
           {CERTIFICATES.map((cert, index) => (
             <motion.button
               key={index}
               onClick={() => handleCertificateSelect(index)}
               className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all whitespace-nowrap md:whitespace-normal",
+                "flex items-center gap-2.5 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg text-left transition-all whitespace-nowrap md:whitespace-normal flex-shrink-0 min-h-[44px]",
                 selectedCertificate === index
                   ? "bg-gray-800/50 text-white"
-                  : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/30"
+                  : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/30 active:bg-gray-800/40"
               )}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Award className="w-5 h-5 flex-shrink-0 opacity-80" />
-              <span className="font-medium text-sm md:text-base">
+              <Award className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0 opacity-80" />
+              <span className="font-medium text-xs md:text-sm lg:text-base">
                 {cert.title}
               </span>
             </motion.button>
@@ -123,7 +123,7 @@ export default function Certificates() {
         </div>
 
         {/* Right Side - Certificate Details */}
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedCertificate}
@@ -132,28 +132,28 @@ export default function Certificates() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="mb-6">
-                <h4 className="text-2xl md:text-3xl font-bold text-gray-100 mb-2">
-                  <span className="gradient-text">{selectedCert.title}</span>
+              <div className="mb-5 md:mb-6">
+                <h4 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-100 mb-1.5 md:mb-2 leading-tight">
+                  <span className="gradient-text break-words">{selectedCert.title}</span>
                 </h4>
-                <p className="text-gray-400 text-sm md:text-base mb-2">
+                <p className="text-gray-400 text-xs md:text-sm lg:text-base mb-1 md:mb-2">
                   {selectedCert.issuer}
                 </p>
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-500 text-xs md:text-sm">
                   {selectedCert.date}
                 </p>
               </div>
 
               {selectedCert.skills && selectedCert.skills.length > 0 && (
-                <div className="mt-6">
-                  <h5 className="text-lg font-semibold text-gray-200 mb-4">
+                <div className="mt-5 md:mt-6">
+                  <h5 className="text-base md:text-lg font-semibold text-gray-200 mb-3 md:mb-4">
                     Skills & Technologies
                   </h5>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 md:gap-2">
                     {selectedCert.skills.map((skill, i) => (
                       <span
                         key={i}
-                        className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors"
+                        className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors"
                       >
                         {skill}
                       </span>

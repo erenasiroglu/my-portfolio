@@ -257,24 +257,24 @@ export default function About({ isLoading }: AboutProps) {
                 {content[language].experience}
               </motion.h3>
 
-              <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+              <div className="flex flex-col md:flex-row gap-6 md:gap-12">
                 {/* Left Side - Company List */}
-                <div className="flex md:flex-col gap-2 md:gap-0 border-b md:border-b-0 md:border-r border-gray-800 pb-4 md:pb-0 md:pr-8 md:min-w-[200px]">
+                <div className="flex md:flex-col gap-2 md:gap-0 border-b md:border-b-0 md:border-r border-gray-800 pb-4 md:pb-0 md:pr-8 md:min-w-[200px] overflow-x-auto md:overflow-x-visible -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide">
                   {experiences.map((exp, index) => (
                     <motion.button
                       key={index}
                       onClick={() => handleCompanySelect(index)}
                       className={cn(
-                        "flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all",
+                        "flex items-center gap-2.5 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg text-left transition-all whitespace-nowrap md:whitespace-normal flex-shrink-0 min-h-[44px]",
                         selectedExperience === index
                           ? "bg-gray-800/50 text-white"
-                          : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/30"
+                          : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/30 active:bg-gray-800/40"
                       )}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <Building2 className="w-5 h-5 flex-shrink-0 opacity-80" />
-                      <span className="font-medium text-sm md:text-base">
+                      <Building2 className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0 opacity-80" />
+                      <span className="font-medium text-xs md:text-sm lg:text-base">
                         {exp.company}
                       </span>
                     </motion.button>
@@ -282,7 +282,7 @@ export default function About({ isLoading }: AboutProps) {
                 </div>
 
                 {/* Right Side - Experience Details */}
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={selectedExperience}
@@ -291,40 +291,40 @@ export default function About({ isLoading }: AboutProps) {
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="mb-6">
-                        <h4 className="text-2xl md:text-3xl font-bold text-gray-100 mb-2">
+                      <div className="mb-5 md:mb-6">
+                        <h4 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-100 mb-1.5 md:mb-2 leading-tight">
                           <span className="gradient-text">
                             {selectedExp.role[language]}
                           </span>{" "}
-                          <span className="text-blue-400">@ {selectedExp.company}</span>
+                          <span className="text-blue-400 text-lg md:text-xl lg:text-2xl">@ {selectedExp.company}</span>
                         </h4>
-                        <p className="text-gray-400 text-sm md:text-base">
+                        <p className="text-gray-400 text-xs md:text-sm lg:text-base">
                           {selectedExp.year}
                         </p>
                       </div>
 
-                      <div className="space-y-4 mb-6">
+                      <div className="space-y-3 md:space-y-4 mb-5 md:mb-6">
                         {selectedExp.highlights[language].map((highlight, index) => (
                           <motion.div
                             key={index}
                             initial={{ opacity: 0, x: 10 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.1 }}
-                            className="flex items-start gap-3"
+                            className="flex items-start gap-2.5 md:gap-3"
                           >
-                            <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                            <p className="text-gray-300 text-sm md:text-base">
+                            <Check className="w-4 h-4 md:w-5 md:h-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                            <p className="text-gray-300 text-xs md:text-sm lg:text-base leading-relaxed">
                               {highlight}
                             </p>
                           </motion.div>
                         ))}
                       </div>
 
-                      <div className="flex flex-wrap gap-2 mt-6">
+                      <div className="flex flex-wrap gap-1.5 md:gap-2 mt-5 md:mt-6">
                         {selectedExp.technologies.map((tech, i) => (
                           <span
                             key={i}
-                            className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors"
+                            className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors"
                           >
                             {tech}
                           </span>

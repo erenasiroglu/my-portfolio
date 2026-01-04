@@ -323,28 +323,28 @@ export default function Projects() {
         {content[language].title}
       </motion.h2>
 
-      <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-12">
         {/* Left Side - Project List */}
-        <div className="flex md:flex-col gap-2 md:gap-0 border-b md:border-b-0 md:border-r border-gray-800 pb-4 md:pb-0 md:pr-8 md:min-w-[250px] overflow-x-auto md:overflow-x-visible">
+        <div className="flex md:flex-col gap-2 md:gap-0 border-b md:border-b-0 md:border-r border-gray-800 pb-4 md:pb-0 md:pr-8 md:min-w-[250px] overflow-x-auto md:overflow-x-visible -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide">
           {PROJECTS.map((project, index) => (
             <motion.button
               key={index}
               onClick={() => handleProjectSelect(index)}
               className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all whitespace-nowrap md:whitespace-normal",
+                "flex items-center gap-2.5 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg text-left transition-all whitespace-nowrap md:whitespace-normal flex-shrink-0 min-h-[44px]",
                 selectedProject === index
                   ? "bg-gray-800/50 text-white"
-                  : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/30"
+                  : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/30 active:bg-gray-800/40"
               )}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Github className="w-5 h-5 flex-shrink-0 opacity-80" />
-              <span className="font-medium text-sm md:text-base">
+              <Github className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0 opacity-80" />
+              <span className="font-medium text-xs md:text-sm lg:text-base flex-1">
                 {project.name[language]}
               </span>
               {project.isNew && (
-                <span className="ml-auto bg-blue-500/20 text-blue-400 text-xs font-semibold px-2 py-0.5 rounded-full border border-blue-500/30">
+                <span className="ml-2 bg-blue-500/20 text-blue-400 text-[10px] md:text-xs font-semibold px-2 py-0.5 rounded-full border border-blue-500/30 flex-shrink-0">
                   New
                 </span>
               )}
@@ -353,7 +353,7 @@ export default function Projects() {
         </div>
 
         {/* Right Side - Project Details */}
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedProject}
@@ -362,53 +362,53 @@ export default function Projects() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="mb-6 flex items-start justify-between gap-4">
-                <div>
-                  <h4 className="text-2xl md:text-3xl font-bold text-gray-100 mb-2">
-                    <span className="gradient-text">{selectedProj.name[language]}</span>
+              <div className="mb-5 md:mb-6 flex items-start justify-between gap-3 md:gap-4">
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-100 mb-1.5 md:mb-2 leading-tight">
+                    <span className="gradient-text break-words">{selectedProj.name[language]}</span>
                   </h4>
                   {selectedProj.isNew && (
-                    <span className="inline-block bg-blue-500/20 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/30 mb-2">
+                    <span className="inline-block bg-blue-500/20 text-blue-400 text-xs font-semibold px-2.5 md:px-3 py-0.5 md:py-1 rounded-full border border-blue-500/30 mb-2">
                       New
                     </span>
                   )}
                 </div>
-                <div className="flex items-center gap-3 flex-shrink-0">
+                <div className="flex items-center gap-2.5 md:gap-3 flex-shrink-0">
                   {selectedProj.live_url && (
                     <Link
                       href={selectedProj.live_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300 transition-colors"
+                      className="text-blue-400 hover:text-blue-300 transition-colors p-1.5 md:p-1 -m-1.5 md:-m-1"
                       onClick={() => trackLinkClick("live", selectedProj.name[language])}
                     >
-                      <ExternalLink className="w-5 h-5" />
+                      <ExternalLink className="w-5 h-5 md:w-5 md:h-5" />
                     </Link>
                   )}
                   <Link
                     href={selectedProj.github_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-gray-200 transition-colors"
+                    className="text-gray-400 hover:text-gray-200 transition-colors p-1.5 md:p-1 -m-1.5 md:-m-1"
                     onClick={() => trackLinkClick("github", selectedProj.name[language])}
                   >
-                    <Github className="w-5 h-5" />
+                    <Github className="w-5 h-5 md:w-5 md:h-5" />
                   </Link>
                 </div>
               </div>
 
               {selectedProj.highlights && (
-                <div className="space-y-4 mb-6">
+                <div className="space-y-3 md:space-y-4 mb-5 md:mb-6">
                   {selectedProj.highlights[language].map((highlight, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, x: 10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="flex items-start gap-3"
+                      className="flex items-start gap-2.5 md:gap-3"
                     >
-                      <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <p className="text-gray-300 text-sm md:text-base">
+                      <Check className="w-4 h-4 md:w-5 md:h-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <p className="text-gray-300 text-xs md:text-sm lg:text-base leading-relaxed">
                         {highlight}
                       </p>
                     </motion.div>
@@ -416,11 +416,11 @@ export default function Projects() {
                 </div>
               )}
 
-              <div className="flex flex-wrap gap-2 mt-6">
+              <div className="flex flex-wrap gap-1.5 md:gap-2 mt-5 md:mt-6">
                 {selectedProj.technologies.map((tech, i) => (
                   <span
                     key={i}
-                    className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors"
+                    className="inline-block bg-gradient-to-r from-blue-500/10 via-blue-400/10 to-cyan-500/10 text-gray-300 text-xs font-medium px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors"
                   >
                     {tech}
                   </span>
