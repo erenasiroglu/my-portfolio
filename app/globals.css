@@ -26,6 +26,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
+  cursor: url("/cursor.png") 4 4, auto;
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   font-feature-settings: 'kern' 1;
   text-rendering: optimizeLegibility;
@@ -33,6 +34,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+}
+
+a,
+button,
+[role="button"],
+input,
+textarea,
+select,
+label {
+  cursor: url("/cursor.png") 4 4, pointer;
 }
 
 body.loaded {
