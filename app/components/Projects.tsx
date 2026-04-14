@@ -17,8 +17,9 @@ interface Project {
     tr: string;
   };
   technologies: string[];
-  github_url: string;
+  github_url?: string;
   live_url?: string;
+  app_store_url?: string;
   isNew?: boolean;
   highlights?: {
     en: string[];
@@ -29,10 +30,43 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     name: {
+      en: "Tadado: AI Party Guessing Game",
+      tr: "Tadado: AI Parti Tahmin Oyunu",
+    },
+    isNew: true,
+    description: {
+      en: "Tadado is an iOS mobile party game with a fast-paced taboo-style word guessing experience for teams. I designed it to deliver quick rounds, endless replayability with AI-generated cards, and a polished mobile-first game flow.",
+      tr: "Tadado, takımlar için hızlı tempolu tabu tarzı deneyim sunan bir iOS mobil parti oyunudur. Hızlı turlar, AI ile üretilen sınırsız kartlar ve mobil odaklı akıcı oyun akışıyla geliştirdim.",
+    },
+    live_url: "https://www.tadado.app/en",
+    app_store_url:
+      "https://apps.apple.com/tr/app/tadado-ai-party-guessing-game/id6753135485",
+    technologies: [
+      "React Native",
+      "Expo",
+      "Supabase",
+      "ASO",
+      "SEO",
+      "Content Marketing",
+    ],
+    highlights: {
+      en: [
+        "Built a modern taboo-style game flow: describe, guess, and win under time pressure",
+        "Added AI custom deck generation to keep content fresh and highly replayable",
+        "Shipped category-based decks, turn scoring, and pass-limit mechanics for balanced game rounds",
+      ],
+      tr: [
+        "Süre baskısı altında anlat-tahmin et-kazan akışıyla modern tabu tarzı oyun deneyimi geliştirdim",
+        "İçeriği sürekli taze tutmak için AI destekli özel deste üretimi ekledim",
+        "Dengeli oyun turları için kategori bazlı desteler, tur skorlama ve pas limiti mekaniklerini uyguladım",
+      ],
+    },
+  },
+  {
+    name: {
       en: "Expense Tracker App with Expo and Firebase",
       tr: "Gider Takip Uygulaması (Expo ve Firebase)",
     },
-    isNew: true,
     description: {
       en: "This project is an expense tracker application developed using Expo and Firebase. The application allows users to add, delete, and update expenses, as well as view their total expenses.",
       tr: "Bu proje, Expo ve Firebase kullanılarak geliştirilen bir gider takip uygulamasıdır. Uygulama, kullanıcıların gider eklemelerine, silmelerine ve güncellemelerine izin verirken toplam giderlerini görüntülemelerine olanak tanır.",
@@ -280,7 +314,10 @@ export default function Projects() {
   };
 
   // Proje bağlantı tıklamalarını takip etme
-  const trackLinkClick = (type: "github" | "live", projectName: string) => {
+  const trackLinkClick = (
+    type: "github" | "live" | "app_store",
+    projectName: string
+  ) => {
     if (typeof window !== "undefined") {
       if (window.gtag) {
         window.gtag("event", "link_click", {
@@ -379,23 +416,49 @@ export default function Projects() {
                       href={selectedProj.live_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300 transition-colors p-1.5 md:p-1 -m-1.5 md:-m-1"
+                      className="group inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1.5 text-xs md:text-sm font-medium text-blue-300 transition-all hover:border-blue-400/60 hover:bg-blue-500/20 hover:text-blue-200"
                       onClick={() => trackLinkClick("live", selectedProj.name[language])}
                     >
-                      <ExternalLink className="w-5 h-5 md:w-5 md:h-5" />
+                      Website
+                      <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </Link>
                   )}
-                  <Link
-                    href={selectedProj.github_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-gray-200 transition-colors p-1.5 md:p-1 -m-1.5 md:-m-1"
-                    onClick={() => trackLinkClick("github", selectedProj.name[language])}
-                  >
-                    <Github className="w-5 h-5 md:w-5 md:h-5" />
-                  </Link>
+                  {selectedProj.app_store_url && (
+                    <Link
+                      href={selectedProj.app_store_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 text-xs md:text-sm font-medium text-cyan-300 transition-all hover:border-cyan-400/60 hover:bg-cyan-500/20 hover:text-cyan-200"
+                      onClick={() => trackLinkClick("app_store", selectedProj.name[language])}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        className="w-3.5 h-3.5 transition-transform group-hover:scale-110"
+                        fill="currentColor"
+                      >
+                        <path d="M16.365 12.635c.023 2.346 2.06 3.126 2.083 3.136-.017.055-.326 1.12-1.074 2.217-.646.948-1.317 1.892-2.375 1.911-1.04.02-1.374-.617-2.563-.617-1.188 0-1.56.598-2.543.637-1.02.039-1.797-1.024-2.448-1.968-1.33-1.925-2.347-5.441-.98-7.818.68-1.18 1.896-1.926 3.214-1.945 1.002-.02 1.949.676 2.563.676.615 0 1.77-.836 2.982-.713.508.021 1.933.205 2.848 1.545-.074.045-1.7.995-1.687 2.94zm-2.318-5.292c.542-.658.91-1.573.81-2.488-.78.031-1.726.52-2.287 1.178-.503.58-.942 1.509-.824 2.398.87.068 1.759-.443 2.301-1.088z" />
+                      </svg>
+                      App Store
+                    </Link>
+                  )}
+                  {selectedProj.github_url && (
+                    <Link
+                      href={selectedProj.github_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-gray-200 transition-colors p-1.5 md:p-1 -m-1.5 md:-m-1"
+                      onClick={() => trackLinkClick("github", selectedProj.name[language])}
+                    >
+                      <Github className="w-5 h-5 md:w-5 md:h-5" />
+                    </Link>
+                  )}
                 </div>
               </div>
+
+              <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-5 md:mb-6">
+                {selectedProj.description[language]}
+              </p>
 
               {selectedProj.highlights && (
                 <div className="space-y-3 md:space-y-4 mb-5 md:mb-6">

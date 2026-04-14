@@ -67,7 +67,7 @@ export default function Hero({ isLoading }: HeroProps) {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 pt-32 md:pt-48 pb-12 md:pb-16 text-center"
+        className="relative z-10 min-h-[75vh] md:min-h-[82vh] pt-32 md:pt-48 pb-12 md:pb-16 text-center flex flex-col justify-center"
       >
         {isLoading ? (
           <div className="flex flex-col items-center gap-6">
@@ -95,7 +95,7 @@ export default function Hero({ isLoading }: HeroProps) {
                     className: "text-5xl md:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-300 via-blue-500 to-cyan-400",
                   },
                   {
-                    text: "Nasıroglu",
+                    text: "Nasıroğlu",
                     className: "text-5xl md:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-300",
                   },
                 ]}
